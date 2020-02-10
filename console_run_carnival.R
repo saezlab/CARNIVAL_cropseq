@@ -140,6 +140,7 @@ for ( i in names(combined_edited_genes) ) {
 list_names_to_reassign = combined_edited_genes %>% keep( names(.) %in% names(cells_with_one_edits_sep) )
 names( cells_with_one_edits_sep ) = list_names_to_reassign
 
+cells_with_one_edits_merged=list()
 
 for ( i in unique(list_names_to_reassign) ) { 
   new_elem = cells_with_one_edits_sep %>% keep( names(.) == i )
@@ -300,7 +301,7 @@ save(trc_crispr_data,
 #TODO may be will be used on later stages
 #load(Rdata_file)
 
-for ( i in uniprot_ids$GENES[1] ) { 
+for ( i in uniprot_ids$GENES ) { 
   loginfo( paste("Running CARNIVAL for naive (TCR) data, gene: ", i), 
            logger = "CARNIVAL_run.module" )
   uniprot_id = uniprot_ids %>% filter( GENES == i ) 
@@ -324,7 +325,7 @@ for ( i in uniprot_ids$GENES[1] ) {
 }
 
 
-for ( i in uniprot_ids$GENES[1] ) { 
+for ( i in uniprot_ids$GENES ) { 
   loginfo( paste("Running CARNIVAL for perturbed (with TCR) data, gene,", i), 
            logger = "CARNIVAL_run.module" )
   uniprot_id = uniprot_ids %>% filter( GENES == i ) 

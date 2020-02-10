@@ -37,9 +37,9 @@ input_folder  = file.path(base_folder, "input")
 output_folder = file.path(base_folder, "output")
 intermediate_results_folder = file.path(output_folder, "intermediate_results/")
 
-Rdata_file = paste0( intermediate_results_folder, 
-                     "carnival_run_", format(Sys.time(), "%d_%m_%Y_%H_%M"), ".Rdata" )
-logfile = paste0( output_folder, "carnival_run_", format(Sys.time(), "%d_%m_%Y_%H_%M"), ".log" )
+Rdata_file = file.path( intermediate_results_folder, 
+                        paste0("carnival_run_", format(Sys.time(), "%d_%m_%Y_%H_%M"), ".Rdata") )
+logfile = file.path( output_folder, paste0( "carnival_run_", format(Sys.time(), "%d_%m_%Y_%H_%M"), ".log" ) )
 
 raw_crispr_hdf5 = file.path(data_path, "GSE137554_raw_gene_bc_matrices_h5.h5")
 annotated_filename = file.path(data_path, "GSE137554_CellAnnotation.tsv")
