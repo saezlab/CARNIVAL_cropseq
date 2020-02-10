@@ -1,4 +1,4 @@
-This code is a first try out to run CARNIVAL CRISPR-CAS9 perturbation data: [Crop-Seq data](http://www.medical-epigenomics.org/papers/datlinger2017/).
+This code is a first try out to run CARNIVAL on CRISPR-CAS9 perturbation data: [Crop-Seq data](http://www.medical-epigenomics.org/papers/datlinger2017/).
 
 ## Contacts: 
 olga.ivanova@bioquant.uni-heidelberg.de
