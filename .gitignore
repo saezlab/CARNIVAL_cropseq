@@ -1,0 +1,10 @@
+*.ipynb
+*.pyc
+*.Rhistory
+*.RData
+*.Rapp.history
+data/
+results/
+*.pdf
+*#
+.Rproj.user
