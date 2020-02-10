@@ -8,10 +8,10 @@ olga.ivanova@bioquant.uni-heidelberg.de
 Distributed under the GNU GPLv3 License. See accompanying file [LICENSE.txt]() or copy at [http://www.gnu.org/licenses/gpl-3.0.html](http://www.gnu.org/licenses/gpl-3.0.html).
 
 ## Tools used
-[Seurat][https://satijalab.org/seurat/] <br/>
-[VIPER][https://bioconductor.org/packages/release/bioc/html/viper.html] <br/>
+[Seurat](https://satijalab.org/seurat/) <br/>
+[VIPER](https://bioconductor.org/packages/release/bioc/html/viper.html) <br/>
 [CARNIVAL](https://github.com/saezlab/CARNIVAL) <br/>
-[DoRothEA][https://saezlab.github.io/DoRothEA/]
+[DoRothEA](https://saezlab.github.io/DoRothEA/)
 
 ## Citations: 
 [Carnival: Liu, Trairatphisan, Gjerga et al.](https://www.biorxiv.org/content/10.1101/541888v1) <br/>
