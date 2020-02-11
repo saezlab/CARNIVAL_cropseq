@@ -30,38 +30,65 @@ cran_list_packages = c("here")
 CheckAndLoadLibraries(cran_list_packages)
 
 base_folder = here()
-# Update the path to your own path with downloaded data
-data_path = "/Users/olgaivanova/_WORK/_PhD_Heidlbrg_data/CROPseq_data_updated"
+directories_to_check = c()
+files_to_check = c()
 
+########################################################################################
+### ------------ Update if running either preprocessing/carnival part or both------- ###
+########################################################################################
 input_folder  = file.path(base_folder, "input")
 output_folder = file.path(base_folder, "output")
 intermediate_results_folder = file.path(output_folder, "intermediate_results/")
-
-Rdata_file = file.path( intermediate_results_folder, 
-                        paste0("carnival_run_", format(Sys.time(), "%d_%m_%Y_%H_%M"), ".Rdata") )
 logfile = file.path( output_folder, paste0( "carnival_run_", format(Sys.time(), "%d_%m_%Y_%H_%M"), ".log" ) )
+
+directories_to_check = c( input_folder, output_folder, intermediate_results_folder )
+
+########################################################################################
+### ------------ Update only if running preprocessing part ------------------------- ###
+########################################################################################
+preprocess = FALSE #update to TRUE if running preprocessing part 
+
+# Update the path to your own path with downloaded data
+data_path = "/Users/olgaivanova/_WORK/_PhD_Heidlbrg_data/CROPseq_data_updated"
 
 raw_crispr_hdf5 = file.path(data_path, "GSE137554_raw_gene_bc_matrices_h5.h5")
 annotated_filename = file.path(data_path, "GSE137554_CellAnnotation.tsv")
+
+# DoRothEA link to download human regulon
+dorothea_path = paste0("https://raw.githubusercontent.com/saezlab/ConservedFootprints/master/data/",
+                        "dorothea_benchmark/regulons/dorothea_regulon_human_v1.csv")
+
+Rdata_file = file.path( intermediate_results_folder, 
+                        paste0("carnival_run_", format(Sys.time(), "%d_%m_%Y_%H_%M"), ".Rdata") )
+
+if ( preprocess ) {
+  files_to_check = c( raw_crispr_hdf5,
+                      annotated_filename )  
+}
+
+########################################################################################
+### ------------ Update if running carnival part ----------------------------------  ###
+########################################################################################
+# Update the location of RData file if preprocessing has been done 
+carnival_run = FALSE #update to TRUE if running carnival part 
+
+Rdata_file = list.files( path = base_folder, pattern = "\\.Rdata", full.names = TRUE )[1]
 
 # PKN file to run CARNIVAL
 omnipath_filename = file.path(input_folder, "PKNs/omnipath_10_02_2020_13_46.txt")
 dorothea_tf_mapping_filename = file.path(input_folder, "dorothea_TF_mapping.csv")
 
-# DoRothEA link to download human regulon
-dorothea_path = "https://raw.githubusercontent.com/saezlab/ConservedFootprints/master/data/dorothea_benchmark/regulons/dorothea_regulon_human_v1.csv"
-
-# Install CARNIVAL from github. Once CARNIVAL is accepted on Bioconductor, it can be loaded/installed as other packages
+# CARNIVAL will be installed from github using the link below. 
+# TODO Once CARNIVAL is accepted on Bioconductor, it can be loaded/installed as other packages
 CARNIVAL_installation_path = "https://github.com/saezlab/CARNIVAL-Bioconductor-Dev"
 cplex_solver_path = "/Applications/CPLEX_Studio1210/cplex/bin/x86-64_osx/cplex"
 output_directory_carnival = file.path( output_folder, "Results_CARNIVAL_massive/" )
 
-directories = c( input_folder, output_folder, intermediate_results_folder, 
-                 output_directory_carnival )
+directories_to_check = c( directories_to_check, 
+                           output_directory_carnival )
 
-files       = c( cplex_solver_path, omnipath_filename, 
-                 dorothea_tf_mapping_filename, raw_crispr_hdf5,
-                 annotated_filename )
+files       = c( files_to_check, cplex_solver_path, omnipath_filename, 
+                 dorothea_tf_mapping_filename )
 
 ########################################################################################
 ### ------------ CHECKING PROVIDED DIRECTORIES AND FILES. -------------------------- ###

@@ -26,7 +26,6 @@ source("packages_utils.R")
 
 cran_list_packages = c("dplyr")
 bioc_list_packages = c("biomaRt", "UniProt.ws", "OmnipathR")
-
 CheckAndLoadLibraries( cran_list_packages, bioc_list_packages )
 
 
