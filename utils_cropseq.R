@@ -22,9 +22,21 @@
 # DESCRIPTION: Utility functions for CropSeq analysis with CARNIVAL.
 # ====================
 
-source("packages_utils.R")
+if ( !require("here") ) { 
+  install.packages("here")
+}
 
-cran_list_packages = c("dplyr")
+# Reassigne source path if the script is being executed from run_pipeline_cropseq.R
+if ( exists( "opt" ) && opt["source-path"] != "" )  {
+  source_path = opt['source-path']
+} else if ( "here" %in% (.packages()) ) {
+  source_path = here()
+} else {
+  source_path = ""  
+}
+source( file.path(source_path, "packages_utils.R") )
+
+cran_list_packages = c("dplyr", "stringr")
 bioc_list_packages = c("biomaRt", "UniProt.ws", "OmnipathR")
 CheckAndLoadLibraries( cran_list_packages, bioc_list_packages )
 

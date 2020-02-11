@@ -25,11 +25,31 @@
 # https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE137554 
 # ====================
 
-source("packages_utils.R")
-cran_list_packages = c("here")
-CheckAndLoadLibraries(cran_list_packages)
+if ( !require("here") ) { 
+  install.packages("here")
+}
 
-base_folder = here()
+# Reassigne source path if the script is being executed from run_pipeline_cropseq.R
+if ( "here" %in% (.packages()) ) {
+  base_folder = here()
+} else {
+  base_folder = ""  
+}
+
+if ( exists("opt") ) { 
+  run_preprocessing = unlist( opt["run-preprocessing"] )
+  run_carnival = unlist( opt["run-carnival"] )
+} 
+
+# If no instructions are provided (either from console or from other scripts), both are off. 
+if ( !exists("run_preprocessing" )) {
+  run_preprocessing = FALSE 
+} 
+
+if ( !exists("run_carnival") ) {
+  run_carnival = FALSE
+} 
+
 directories_to_check = c()
 files_to_check = c()
 
@@ -46,8 +66,6 @@ directories_to_check = c( input_folder, output_folder, intermediate_results_fold
 ########################################################################################
 ### ------------ Update only if running preprocessing part ------------------------- ###
 ########################################################################################
-preprocess = FALSE #update to TRUE if running preprocessing part 
-
 # Update the path to your own path with downloaded data
 data_path = "/Users/olgaivanova/_WORK/_PhD_Heidlbrg_data/CROPseq_data_updated"
 
@@ -55,13 +73,11 @@ raw_crispr_hdf5 = file.path(data_path, "GSE137554_raw_gene_bc_matrices_h5.h5")
 annotated_filename = file.path(data_path, "GSE137554_CellAnnotation.tsv")
 
 # DoRothEA link to download human regulon
-dorothea_path = paste0("https://raw.githubusercontent.com/saezlab/ConservedFootprints/master/data/",
-                        "dorothea_benchmark/regulons/dorothea_regulon_human_v1.csv")
+dorothea_path = "https://raw.githubusercontent.com/saezlab/ConservedFootprints/master/data/dorothea_benchmark/regulons/dorothea_regulon_human_v1.csv"
 
-Rdata_file = file.path( intermediate_results_folder, 
-                        paste0("carnival_run_", format(Sys.time(), "%d_%m_%Y_%H_%M"), ".Rdata") )
-
-if ( preprocess ) {
+if ( run_preprocessing ) {
+  Rdata_file = file.path( intermediate_results_folder, 
+                          paste0("carnival_run_", format(Sys.time(), "%d_%m_%Y_%H_%M"), ".Rdata") )
   files_to_check = c( raw_crispr_hdf5,
                       annotated_filename )  
 }
@@ -69,11 +85,6 @@ if ( preprocess ) {
 ########################################################################################
 ### ------------ Update if running carnival part ----------------------------------  ###
 ########################################################################################
-# Update the location of RData file if preprocessing has been done 
-carnival_run = FALSE #update to TRUE if running carnival part 
-
-Rdata_file = list.files( path = base_folder, pattern = "\\.Rdata", full.names = TRUE )[1]
-
 # PKN file to run CARNIVAL
 omnipath_filename = file.path(input_folder, "PKNs/omnipath_10_02_2020_13_46.txt")
 dorothea_tf_mapping_filename = file.path(input_folder, "dorothea_TF_mapping.csv")
@@ -84,14 +95,22 @@ CARNIVAL_installation_path = "https://github.com/saezlab/CARNIVAL-Bioconductor-D
 cplex_solver_path = "/Applications/CPLEX_Studio1210/cplex/bin/x86-64_osx/cplex"
 output_directory_carnival = file.path( output_folder, "Results_CARNIVAL_massive/" )
 
-directories_to_check = c( directories_to_check, 
-                           output_directory_carnival )
+if ( !run_preprocessing ) {
+  # !Update the location of RData file if preprocessing has been done 
+  all_Rdata_files = list.files( path = base_folder, pattern = "\\.Rdata", recursive = TRUE, full.names = TRUE )
+  Rdata_file  = all_Rdata_files[length( all_Rdata_files )]
+}
 
-files       = c( files_to_check, cplex_solver_path, omnipath_filename, 
-                 dorothea_tf_mapping_filename )
+if ( run_carnival ) {
+  directories_to_check = c( directories_to_check, 
+                            output_directory_carnival )
+  
+  files_to_check = c( files_to_check, cplex_solver_path, omnipath_filename, 
+                      dorothea_tf_mapping_filename )  
+}
 
 ########################################################################################
-### ------------ CHECKING PROVIDED DIRECTORIES AND FILES. -------------------------- ###
+### ------------ CHECKING PROVIDED DIRECTORIES AND FILES  -------------------------- ###
 ########################################################################################
 
 CreateDirectoriesIfDontExist = function( sub_dir, main_dir = "", needed_main_dir = F ) {
@@ -110,7 +129,7 @@ CheckFile = function( filename, path = "" ) {
 
 tryCatch( 
   expr = { 
-      invisible( sapply(directories, CreateDirectoriesIfDontExist) )
+      invisible( sapply(directories_to_check, CreateDirectoriesIfDontExist) )
   }, 
   error = function(e) { 
       message( "Cannot create directories. Please specify correct paths." )
@@ -119,5 +138,5 @@ tryCatch(
   }
 )
 
-invisible( sapply(files, CheckFile) )
+invisible( sapply(files_to_check, CheckFile) )
 

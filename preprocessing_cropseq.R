@@ -24,13 +24,22 @@
 # ====================
 
 if ( !require("here") ) { 
-  install.packages("here")
+  tryCatch( {
+    install.packages("here")  
+  }, error = function(e) {
+    print("Unable to install package 'here'. Continuing without it.")
+  })
 }
 
-if ( "here" %in% (.packages()) ) {
+# Reassigne source path if the script is being executed from run_pipeline_cropseq.R
+if ( exists( "opt" ) && opt["source-path"] != "" ) {
+  source_path =  opt["source-path"] 
+} else if ( "here" %in% (.packages()) ) {
   source_path = here()
+  run_preprocessing = TRUE
 } else {
   source_path = ""  
+  run_preprocessing = TRUE
 }
 
 source( file.path(source_path, "packages_utils.R") )
@@ -44,7 +53,7 @@ cran_list_packages = c("dplyr","readr", "stringr", "purrr", "tibble", "tidyr",
                        "Seurat", "logging", "BiocManager", "devtools")
 bioc_list_packages = c("viper", "rhdf5")
 
-CheckAndLoadLibraries( cran_list_packages, bioc_list_packages, github_packages )
+CheckAndLoadLibraries( cran_list_packages, bioc_list_packages )
 
 basicConfig(level = "DEBUG")
 addHandler(writeToFile, logger = "preprocessing_run", file = logfile)
@@ -149,7 +158,7 @@ for ( i in names(combined_edited_genes) ) {
 list_names_to_reassign = combined_edited_genes %>% keep( names(.) %in% names(cells_with_one_edits_sep) )
 names( cells_with_one_edits_sep ) = list_names_to_reassign
 
-cells_with_one_edits_merged=list()
+cells_with_one_edits_merged = list()
 
 for ( i in unique(list_names_to_reassign) ) { 
   new_elem = cells_with_one_edits_sep %>% keep( names(.) == i )
@@ -244,9 +253,9 @@ colnames( averaged_gene_expression_stim ) = unique( names(tcr_genes_to_keep) )
 
 
 ### -------- LOADING DOROTHEA ----------------------------------------------------------------------- ###
+loginfo("Loading DoRothEA and starting VIPER", logger = "preprocessing_run.module")
 dorothea_regulon_human = read_csv( dorothea_path )
 regulon = dorothea_regulon_human %>% filter( confidence %in% c("A","B","C") ) %>% df2regulon()
-
 
 ### -------- RUNNING_VIPER ----------------------------------------------------------------------- ###
 tcr_genes_viper_naive      = viper(eset = averaged_gene_expression_naive, regulon = regulon, method = "scale", 
@@ -261,6 +270,7 @@ tcr_genes_viper_stimulated = viper(eset = averaged_gene_expression_stim,  regulo
                                    cores = 1, 
                                    verbose = FALSE)
 
+loginfo("Saving the results of preprocessing", logger = "preprocessing_run.module")
 
 # Saving intermediate results to RData file
 save(trc_crispr_data,
@@ -277,3 +287,4 @@ save(trc_crispr_data,
      tcr_genes_viper_stimulated,
      file = Rdata_file)
 
+loginfo("PREPROCESSING DONE", logger = "preprocessing_run.module")
