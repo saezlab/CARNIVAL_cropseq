@@ -31,19 +31,22 @@ if ( !require("here") ) {
   })
 }
 
-# Reassigne source path if the script is being executed from run_pipeline_cropseq.R
-if ( exists( "opt" ) && opt["source-path"] != "" ) {
-  source_path =  opt["source-path"] 
-} else if ( "here" %in% (.packages()) ) {
+########################################################################################
+### ------ SETTING UP DEFAULT PARAMETERS (if running as a standalone script) ------- ###
+######################################################################################## 
+if ( !exists("source_path") && "here" %in% (.packages()) ) {
   source_path = here()
-  run_preprocessing = TRUE
-} else {
+} else if ( !exists("source_path") ) {
   source_path = ""  
-  run_preprocessing = TRUE
 }
 
+print(source_path)
 source( file.path(source_path, "packages_utils.R") )
 source( file.path(source_path, "paths.R") )
+
+if ( !exists("run_preprocessing") ) {
+  run_preprocessing = TRUE  
+}
 
 ########################################################################################
 ### ------------ INSTALLING/LOADING NECESSARY PACKAGES ----------------------------- ###
@@ -51,7 +54,7 @@ source( file.path(source_path, "paths.R") )
 
 cran_list_packages = c("dplyr","readr", "stringr", "purrr", "tibble", "tidyr",
                        "Seurat", "logging", "BiocManager", "devtools")
-bioc_list_packages = c("viper", "rhdf5")
+bioc_list_packages = c("viper", "biomaRt", "UniProt.ws", "rhdf5")
 
 CheckAndLoadLibraries( cran_list_packages, bioc_list_packages )
 
@@ -60,6 +63,7 @@ addHandler(writeToFile, logger = "preprocessing_run", file = logfile)
 loginfo("Preprocessing script started", logger = "preprocessing_run.module")
 
 source( file.path(source_path, "utils_CARNIVAL.R") )
+source( file.path(source_path, "utils_cropseq.R") )
 
 ########################################################################################
 ### ------------ READING THE DATA -------------------------------------------------- ###
@@ -137,7 +141,7 @@ SelectSingleEdits = function( dataset, cell_annotations, edited_genes, one_gene 
   
   if ( dim(edited_cells)[1] ) { 
     assigned_barcodes = barcodes[as.numeric(edited_cells$barcode)]
-    annotations = cell_annotations %>% filter(Cell.barcode %in% assigned_barcodes)
+    annotations = cell_annotations %>% dplyr::filter(Cell.barcode %in% assigned_barcodes)
     return( list(annotations) )
   }
   
@@ -220,7 +224,7 @@ CollectAverageSignatures = function( dataset, preselected_annotations, gene_name
     #Choose barcodes for a specific condition, specific CRISPR-CAS9 edit
     preselected_annotations = preselected_annotations %>% keep( names(.) == gene_name ) %>% 
       pluck( gene_name ) %>%
-      filter( Sample == condition )
+      dplyr::filter( Sample == condition )
     
     genes_data_one_gene = subset( dataset, cells = preselected_annotations$Cell.barcode )
     averaged_expression_one_gene_condition = AverageExpression( genes_data_one_gene, return.seurat = TRUE )
@@ -255,7 +259,7 @@ colnames( averaged_gene_expression_stim ) = unique( names(tcr_genes_to_keep) )
 ### -------- LOADING DOROTHEA ----------------------------------------------------------------------- ###
 loginfo("Loading DoRothEA and starting VIPER", logger = "preprocessing_run.module")
 dorothea_regulon_human = read_csv( dorothea_path )
-regulon = dorothea_regulon_human %>% filter( confidence %in% c("A","B","C") ) %>% df2regulon()
+regulon = dorothea_regulon_human %>% dplyr::filter( confidence %in% c("A","B","C") ) %>% df2regulon()
 
 ### -------- RUNNING_VIPER ----------------------------------------------------------------------- ###
 tcr_genes_viper_naive      = viper(eset = averaged_gene_expression_naive, regulon = regulon, method = "scale", 
@@ -269,6 +273,9 @@ tcr_genes_viper_stimulated = viper(eset = averaged_gene_expression_stim,  regulo
                                    eset.filter = FALSE, 
                                    cores = 1, 
                                    verbose = FALSE)
+
+loginfo( "Translating IDs", logger = "preprocessing_run.module" )
+uniprot_ids = TranslateIds( names(tcr_genes_to_keep) )
 
 loginfo("Saving the results of preprocessing", logger = "preprocessing_run.module")
 
@@ -285,6 +292,7 @@ save(trc_crispr_data,
      averaged_gene_expression_stim,
      tcr_genes_viper_naive,
      tcr_genes_viper_stimulated,
+     uniprot_ids,
      file = Rdata_file)
 
 loginfo("PREPROCESSING DONE", logger = "preprocessing_run.module")

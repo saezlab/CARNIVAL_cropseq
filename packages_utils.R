@@ -21,19 +21,25 @@
 # ====================
 # DESCRIPTION: Utility functions for handling libraries in R.
 # ====================
+# NB setting a cran mirror is necessary for running on the cluster
+cran_mirrors = "https://cran.uni-muenster.de/"
 
 CheckAndLoadLibraries = function(cran_list_packages = "", bioc_list_packages = "", github_packages = "") {
   all_packages = c( cran_list_packages, bioc_list_packages, github_packages )
   all_packages = all_packages[all_packages != ""]
   new_packages = all_packages[!(all_packages %in% installed.packages()[,"Package"])]
   
+  if ( length(new_packages) > 0 ) {
+    print( paste0("New packages to install:", paste0(new_packages, collapse = ", ")) )  
+  }
+
   cran_packages_to_install = cran_list_packages[cran_list_packages %in% new_packages]
   bioc_packages_to_install = bioc_list_packages[bioc_list_packages %in% new_packages]
   github_packages_to_install = github_packages[names(github_packages) %in% new_packages]
   
   if ( length(cran_packages_to_install) ) {
     
-    utils::install.packages(cran_packages_to_install) 
+    utils::install.packages( cran_packages_to_install, repos = cran_mirrors ) 
   } else if ( length(bioc_packages_to_install) ) {
     
     BiocManager::install(bioc_packages_to_install)

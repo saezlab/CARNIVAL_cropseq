@@ -31,41 +31,43 @@ if ( !require("here") ) {
   })
 }
 
-# Reassigne source path if the script is being executed from run_pipeline_cropseq.R
-if ( exists( "opt" ) && opt["source-path"] != "" )  {
-  source_path = opt['source-path']
-} else if ( "here" %in% (.packages()) ) {
+########################################################################################
+### ------ SETTING UP DEFAULT PARAMETERS (if running as a standalone script) ------- ###
+########################################################################################
+
+if ( !exists("source_path") && "here" %in% (.packages()) ) {
   source_path = here()
-  run_carnival = TRUE
-} else {
+} else if ( !exists( source_path ) ) {
   source_path = ""  
+}
+
+source( file.path(source_path, "packages_utils.R") )
+source( file.path(source_path, "paths.R") )
+
+if( !exists("carnival_threads") ) {
+  carnival_threads = 0
+}
+
+if ( !exists("run_carnival") ) { 
   run_carnival = TRUE
 }
 
-if ( exists( "opt" ) ) {
-  carnival_threads =  opt["carnival-threads"]
-  test_run = opt["test"]
-} else {
-  carnival_threads = 0
-  test_run = FALSE
+if ( !exists("test_run") ) {
+  test_run = FALSE  
 }
-
 
 ########################################################################################
 ### ------------ INSTALLING/LOADING NECESSARY PACKAGES ----------------------------- ###
 ########################################################################################
-source( file.path(source_path, "packages_utils.R") )
-source( file.path(source_path, "paths.R") )
-
 cran_list_packages = c("dplyr", "logging")
-bioc_list_packages = c("biomaRt", "UniProt.ws", "OmnipathR")
+bioc_list_packages = c("OmnipathR")
 github_packages    = c("CARNIVAL" = CARNIVAL_installation_path)
 CheckAndLoadLibraries(  cran_list_packages, bioc_list_packages, github_packages )
 
 basicConfig(level = "DEBUG")
 addHandler(writeToFile, logger = "CARNIVAL_run", file = logfile)
 loginfo("CARNIVAL script started", logger = "CARNIVAL_run.module")
-loginfo( paste0("Running with the setup: source path: ", source_path, ";", 
+loginfo( paste0("Running CARNIVAL script with a setup: source path: ", source_path, ";", 
                " Is it a test run: ", test_run, ";",
                " N threads:", carnival_threads), 
          logger = "CARNIVAL_run.module" )
@@ -73,21 +75,15 @@ loginfo( paste0("Running with the setup: source path: ", source_path, ";",
 source( file.path(source_path, "utils_cropseq.R") )
 
 ########################################################################################
-### ------------ RUNNING PREPROCESSING IF NEEDED ----------------------------------- ###
+### ------------ READING PREPROCESSED DATA OR RUNNING PREPROCESSING IF NEEDED ------ ###
 ########################################################################################
-
-if ( exists("opt") && unlist( opt["run-preprocessing"] ) ) { 
-  source( file.path(source_path, "preprocessing_cropseq.R") )
-} else {
-  
-  if( file.exists(Rdata_file) ) {
-    loginfo( "Loading preprocessed Rdata file...", logger = "CARNIVAL_run.module" )
+if( file.exists(Rdata_file) ) {
+    loginfo( "Loading preprocessed Rdata file", logger = "CARNIVAL_run.module" )
     load(Rdata_file)
-  } else { 
+} else { 
     loginfo( "Cannot load RData file with preprocessed data, trying to run preprocessing first...",
              logger = "CARNIVAL_run.module" )
     source( file.path(source_path, "preprocessing_cropseq.R") )
-  }
 }
 
 #########################################################################################################
@@ -109,7 +105,7 @@ RunCarnivalOneTime = function( edited_gene_name, prior_knowledge_network, viper_
                              DOTfig = FALSE,
                              threads = threads)
   if ( save_outfile ) { 
-    results_carnival = res_carnival$weightedSIF %>% select("Node1", "Node2", "Sign")
+    results_carnival = res_carnival$weightedSIF %>% dplyr::select("Node1", "Node2", "Sign")
     write.csv(results_carnival, file = paste0(output_dir, output_filename), 
               quote = FALSE, row.names = FALSE) 
   }
@@ -123,7 +119,7 @@ RunCarnivalOnListGenes = function( uniprot_ids, tcr_genes_viper, prior_knowledge
   for ( i in uniprot_ids$GENES ) { 
     loginfo( paste("Running CARNIVAL for naive (TCR) data, gene: ", i), 
              logger = "CARNIVAL_run.module" )
-    uniprot_id = uniprot_ids %>% filter( GENES == i ) 
+    uniprot_id = uniprot_ids %>% dplyr::filter( GENES == i ) 
     perturbations = data.frame( "1" )
     names(perturbations) = uniprot_id$UNIPROTKB
     
@@ -151,12 +147,9 @@ RunCarnivalOnListGenes = function( uniprot_ids, tcr_genes_viper, prior_knowledge
 loginfo( "Reading/requesting prior knowledge network", logger = "CARNIVAL_run.module" )
 prior_knowledge_network = LoadPKNForCarnival( omnipath_filename )
 
-loginfo( "Translating IDs", logger = "CARNIVAL_run.module" )
-uniprot_ids = TranslateIds( names(tcr_genes_to_keep) )
-
 if ( test_run ) {
   loginfo( "Test run of CARNIVAL is initiated", logger = "CARNIVAL_run.module" )
-  RunCarnivalOnListGenes( uniprot_ids[1], tcr_genes_viper_naive, prior_knowledge_network, carnival_threads)
+  RunCarnivalOnListGenes( uniprot_ids[1, ], tcr_genes_viper_naive, prior_knowledge_network, carnival_threads)
   loginfo( "Test run of CARNIVAL is finished", logger = "CARNIVAL_run.module" )
 } else {
   RunCarnivalOnListGenes( uniprot_ids, tcr_genes_viper_naive, prior_knowledge_network, carnival_threads )

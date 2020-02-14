@@ -29,25 +29,16 @@ if ( !require("here") ) {
   install.packages("here")
 }
 
-# Reassigne source path if the script is being executed from run_pipeline_cropseq.R
-if ( "here" %in% (.packages()) ) {
+if ( !exists( "opt" ) & "here" %in% (.packages()) ) {
   base_folder = here()
-} else {
-  base_folder = ""  
+} else if ( !exists( "opt" ) ) {
+  base_folder = ""
 }
 
-if ( exists("opt") ) { 
+if ( exists( "opt" ) ) { 
   run_preprocessing = unlist( opt["run-preprocessing"] )
   run_carnival = unlist( opt["run-carnival"] )
-} 
-
-# If no instructions are provided (either from console or from other scripts), both are off. 
-if ( !exists("run_preprocessing" )) {
-  run_preprocessing = FALSE 
-} 
-
-if ( !exists("run_carnival") ) {
-  run_carnival = FALSE
+  test_run = unlist( opt["test"] )
 } 
 
 directories_to_check = c()
@@ -56,9 +47,31 @@ files_to_check = c()
 ########################################################################################
 ### ------------ Update if running either preprocessing/carnival part or both------- ###
 ########################################################################################
-input_folder  = file.path(base_folder, "input")
-output_folder = file.path(base_folder, "output")
-intermediate_results_folder = file.path(output_folder, "intermediate_results/")
+
+if ( exists("opt") && unlist(opt["default-input-output"]) ) {
+  input_folder = file.path( getwd(), "input" )
+  output_folder = file.path( getwd(), "output" )
+} else { 
+  
+  if ( exists( "opt" ) && unlist(opt["input-folder"]) != "" )  {
+    input_folder = opt["input-folder"]
+  } else {
+    input_folder  = file.path( base_folder, "input" )  
+  }
+  
+  if ( exists( "opt" ) && unlist(opt["output-folder"]) != "" )  {
+    output_folder = opt["output-folder"]
+  } else {
+    output_folder  = file.path( base_folder, "output" )  
+  }
+  
+}
+
+if ( exists( "opt" ) && opt["rdata-file"] != "" )  {
+  Rdata_file = opt["rdata-file"]
+}
+
+intermediate_results_folder = file.path( output_folder, "intermediate_results/" )
 logfile = file.path( output_folder, paste0( "carnival_run_", format(Sys.time(), "%d_%m_%Y_%H_%M"), ".log" ) )
 
 directories_to_check = c( input_folder, output_folder, intermediate_results_folder )
@@ -69,8 +82,8 @@ directories_to_check = c( input_folder, output_folder, intermediate_results_fold
 # Update the path to your own path with downloaded data
 data_path = "/Users/olgaivanova/_WORK/_PhD_Heidlbrg_data/CROPseq_data_updated"
 
-raw_crispr_hdf5 = file.path(data_path, "GSE137554_raw_gene_bc_matrices_h5.h5")
-annotated_filename = file.path(data_path, "GSE137554_CellAnnotation.tsv")
+raw_crispr_hdf5 = file.path( data_path, "GSE137554_raw_gene_bc_matrices_h5.h5" )
+annotated_filename = file.path( data_path, "GSE137554_CellAnnotation.tsv" )
 
 # DoRothEA link to download human regulon
 dorothea_path = "https://raw.githubusercontent.com/saezlab/ConservedFootprints/master/data/dorothea_benchmark/regulons/dorothea_regulon_human_v1.csv"
@@ -86,8 +99,8 @@ if ( run_preprocessing ) {
 ### ------------ Update if running carnival part ----------------------------------  ###
 ########################################################################################
 # PKN file to run CARNIVAL
-omnipath_filename = file.path(input_folder, "PKNs/omnipath_10_02_2020_13_46.txt")
-dorothea_tf_mapping_filename = file.path(input_folder, "dorothea_TF_mapping.csv")
+omnipath_filename = file.path( input_folder, "PKNs/omnipath_10_02_2020_13_46.txt" )
+dorothea_tf_mapping_filename = file.path( input_folder, "dorothea_TF_mapping.csv" )
 
 # CARNIVAL will be installed from github using the link below. 
 # TODO Once CARNIVAL is accepted on Bioconductor, it can be loaded/installed as other packages
@@ -96,9 +109,13 @@ cplex_solver_path = "/Applications/CPLEX_Studio1210/cplex/bin/x86-64_osx/cplex"
 output_directory_carnival = file.path( output_folder, "Results_CARNIVAL_massive/" )
 
 if ( !run_preprocessing ) {
-  # !Update the location of RData file if preprocessing has been done 
-  all_Rdata_files = list.files( path = base_folder, pattern = "\\.Rdata", recursive = TRUE, full.names = TRUE )
-  Rdata_file  = all_Rdata_files[length( all_Rdata_files )]
+  if ( Rdata_file == "" ){
+    print("No preprocessing requested and no Rdata file provided.")
+    print( paste0("Trying to find R data file in the output folder: ", output_folder) )
+    all_Rdata_files = list.files( path = output_folder, pattern = "\\.Rdata", 
+                                  recursive = TRUE, full.names = TRUE )
+    Rdata_file  = all_Rdata_files[ length( all_Rdata_files ) ]
+  }
 }
 
 if ( run_carnival ) {
@@ -140,3 +157,5 @@ tryCatch(
 
 invisible( sapply(files_to_check, CheckFile) )
 
+print( paste0("All directories for a run:", paste0(directories_to_check, collapse = ", ")) )
+print( paste0("All specfified input files for a run:", paste0(files_to_check, collapse = ", ")) )

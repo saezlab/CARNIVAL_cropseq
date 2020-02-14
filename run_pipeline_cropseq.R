@@ -25,7 +25,7 @@
 if ( !require("here") ) { 
   tryCatch( {
     install.packages("here")  
-  }, error = function(e) {
+  }, error = function( e ) {
     print("Unable to install package 'here'. Continuing without it.")
   })
 }
@@ -35,16 +35,34 @@ if ( !require("optparse") ) {
 }
 
 option_list = list(
-  make_option( c("-p", "--run-preprocessing"), type = "logical", default = FALSE, action = "store_true",
+  make_option( c("-a", "--run-preprocessing"), type = "logical", default = FALSE, action = "store_true",
                 help = "Specify if the data should be preprocessed first (Seurat + VIPER/DoRothEA)", 
                 metavar = "logical" ), 
+  
   make_option( c("-t", "--test"), type = "logical", default = FALSE, action = "store_true",
                help = "Run CARNIVAL for one gene. Should be run together with -p option or RData file (in paths.R) 
                        with preprocessed data should be prodived", metavar = "logical" ),
+  
   make_option( c("-c", "--run-carnival"), type = "logical", default = FALSE, action = "store_true",
                help = "Provide source path for the run", metavar = "logical" ), 
+  
   make_option( c("-s", "--source-path"), type = "character", default = "", 
-                help = "Provide source path for the run", metavar = "character" ), 
+                help = "Provide source path (with code) for the run", metavar = "character" ), 
+  
+    make_option( c("-d", "--rdata-file"), type = "character", default = FALSE, action = "store_true",
+               help = "Specify the full path to R data file if preprocessing has been done before", 
+               metavar = "character" ), 
+  
+  make_option( c("-u", "--default-input-output"), type = "logical", default = FALSE, action = "store_true",
+               help = "Specify if the data should be preprocessed first (Seurat + VIPER/DoRothEA)", 
+               metavar = "logical" ), 
+  
+  make_option( c("-i", "--input-folder"), type = "character", default = "", 
+               help = "Provide input folder", metavar = "character" ),
+  
+  make_option( c("-o", "--output-folder"), type = "character", default = "", 
+               help = "Provide output folder", metavar = "character" ),
+  
   make_option( c("-r", "--carnival-threads"), type = "numeric", default = 0, 
                 help = "Provide number of threads to run CARNIVAL", metavar = "numeric" )
 )
@@ -66,11 +84,21 @@ if ( opt["source-path"] != "") {
   source_path = opt["source-path"]
 } else if ( "here" %in% (.packages()) ) {
   source_path = here()
+  print( paste0("Source path was not provided. Using the path provided by here() library:", source_path) )
 } else {
   source_path = ""  
+  print( paste0("Source path was not provided. Using: ", source_path) )
 }
 
-print(source_path)
+if ( unlist(opt["input-folder"] == "") |
+     unlist(opt["output-folder"]) == "")  {
+  if ( !unlist( opt["default-input-output"] ) ) { 
+    print_help( opt_parser )
+    stop("Please provide input/output folders for the run", call. = FALSE)  
+  }
+}
+
+
 if ( unlist( opt["run-preprocessing"] ) ) {
   source( file.path(source_path, "preprocessing_cropseq.R") )
 }

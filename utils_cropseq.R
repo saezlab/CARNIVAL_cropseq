@@ -36,7 +36,7 @@ if ( exists( "opt" ) && opt["source-path"] != "" )  {
 }
 source( file.path(source_path, "packages_utils.R") )
 
-cran_list_packages = c("dplyr", "stringr")
+cran_list_packages = c("dplyr", "stringr", "purrr")
 bioc_list_packages = c("biomaRt", "UniProt.ws", "OmnipathR")
 CheckAndLoadLibraries( cran_list_packages, bioc_list_packages )
 
@@ -72,7 +72,7 @@ LoadPKNForCarnival = function( path_file = "" ) {
   omnipath_pkn = omnipath_pkn %>% mutate( consensus_inhibition_upd = ifelse(consensus_inhibition == 1, -1, 0) ) %>%
                                   mutate( effect = consensus_stimulation + consensus_inhibition_upd ) %>%
                                   dplyr::select( "source", "effect", "target" ) %>%
-                                  filter( effect != 0 )
+                                  dplyr::filter( effect != 0 )
 
   omnipath_pkn = omnipath_pkn %>% filter_at( vars(source, target),
                                              all_vars(!str_detect(., "COMPLEX:")) )
