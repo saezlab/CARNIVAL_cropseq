@@ -37,7 +37,7 @@ if ( !require("here") ) {
 
 if ( !exists("source_path") && "here" %in% (.packages()) ) {
   source_path = here()
-} else if ( !exists( source_path ) ) {
+} else if ( !exists("source_path") ) {
   source_path = ""  
 }
 
@@ -59,7 +59,7 @@ if ( !exists("test_run") ) {
 ########################################################################################
 ### ------------ INSTALLING/LOADING NECESSARY PACKAGES ----------------------------- ###
 ########################################################################################
-cran_list_packages = c("dplyr", "logging")
+cran_list_packages = c("dplyr", "logging", "tidyr")
 bioc_list_packages = c("OmnipathR")
 github_packages    = c("CARNIVAL" = CARNIVAL_installation_path)
 CheckAndLoadLibraries(  cran_list_packages, bioc_list_packages, github_packages )
@@ -149,7 +149,8 @@ prior_knowledge_network = LoadPKNForCarnival( omnipath_filename )
 
 if ( test_run ) {
   loginfo( "Test run of CARNIVAL is initiated", logger = "CARNIVAL_run.module" )
-  RunCarnivalOnListGenes( uniprot_ids[1, ], tcr_genes_viper_naive, prior_knowledge_network, carnival_threads)
+  # Test CARNIVAL with running on LAT gene (finishes fast)
+  RunCarnivalOnListGenes( uniprot_ids[28, ], tcr_genes_viper_naive, prior_knowledge_network, carnival_threads)
   loginfo( "Test run of CARNIVAL is finished", logger = "CARNIVAL_run.module" )
 } else {
   RunCarnivalOnListGenes( uniprot_ids, tcr_genes_viper_naive, prior_knowledge_network, carnival_threads )

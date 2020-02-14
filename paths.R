@@ -67,9 +67,9 @@ if ( exists("opt") && unlist(opt["default-input-output"]) ) {
   
 }
 
-if ( exists( "opt" ) && opt["rdata-file"] != "" )  {
+if ( exists( "opt" ) )  {
   Rdata_file = opt["rdata-file"]
-}
+} 
 
 intermediate_results_folder = file.path( output_folder, "intermediate_results/" )
 logfile = file.path( output_folder, paste0( "carnival_run_", format(Sys.time(), "%d_%m_%Y_%H_%M"), ".log" ) )
@@ -116,7 +116,10 @@ if ( !run_preprocessing ) {
                                   recursive = TRUE, full.names = TRUE )
     Rdata_file  = all_Rdata_files[ length( all_Rdata_files ) ]
   }
+  files_to_check = c( files_to_check, Rdata_file )
 }
+
+print(Rdata_file)
 
 if ( run_carnival ) {
   directories_to_check = c( directories_to_check, 
@@ -157,5 +160,5 @@ tryCatch(
 
 invisible( sapply(files_to_check, CheckFile) )
 
-print( paste0("All directories for a run:", paste0(directories_to_check, collapse = ", ")) )
-print( paste0("All specfified input files for a run:", paste0(files_to_check, collapse = ", ")) )
+print( paste0("All directories for a run:", paste0(directories_to_check, collapse = "\n, ")) )
+print( paste0("All specified input files for a run:", paste0(files_to_check, collapse = "\n, ")) )

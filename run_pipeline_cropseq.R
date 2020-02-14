@@ -49,7 +49,7 @@ option_list = list(
   make_option( c("-s", "--source-path"), type = "character", default = "", 
                 help = "Provide source path (with code) for the run", metavar = "character" ), 
   
-    make_option( c("-d", "--rdata-file"), type = "character", default = FALSE, action = "store_true",
+    make_option( c("-d", "--rdata-file"), type = "character", default = "",
                help = "Specify the full path to R data file if preprocessing has been done before", 
                metavar = "character" ), 
   
