@@ -54,13 +54,13 @@ if ( exists("opt") && unlist(opt["default-input-output"]) ) {
 } else { 
   
   if ( exists( "opt" ) && unlist(opt["input-folder"]) != "" )  {
-    input_folder = opt["input-folder"]
+    input_folder = unlist( opt["input-folder"] )
   } else {
     input_folder  = file.path( base_folder, "input" )  
   }
   
   if ( exists( "opt" ) && unlist(opt["output-folder"]) != "" )  {
-    output_folder = opt["output-folder"]
+    output_folder = unlist( opt["output-folder"] )
   } else {
     output_folder  = file.path( base_folder, "output" )  
   }
@@ -110,7 +110,7 @@ output_directory_carnival = file.path( output_folder, "Results_CARNIVAL_massive/
 
 if ( !run_preprocessing ) {
   if ( Rdata_file == "" ){
-    print("No preprocessing requested and no Rdata file provided.")
+    print( "No preprocessing requested and no Rdata file provided." )
     print( paste0("Trying to find R data file in the output folder: ", output_folder) )
     all_Rdata_files = list.files( path = output_folder, pattern = "\\.Rdata", 
                                   recursive = TRUE, full.names = TRUE )
