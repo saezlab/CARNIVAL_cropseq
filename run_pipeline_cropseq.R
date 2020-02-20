@@ -64,7 +64,14 @@ option_list = list(
                help = "Provide output folder", metavar = "character" ),
   
   make_option( c("-r", "--carnival-threads"), type = "numeric", default = 0, 
-                help = "Provide number of threads to run CARNIVAL", metavar = "numeric" )
+                help = "Provide number of threads to run CARNIVAL", metavar = "numeric" ),
+  
+  make_option( c("-b", "--start-uniprot-id"), type = "numeric", default = 1, 
+               help = "Provide starting id (out of 30 max)", metavar = "numeric" ),
+  
+  make_option( c("-e", "--end-uniprot-id"), type = "numeric", default = 30, 
+               help = "Provide ending id (out of 30 max)", metavar = "numeric" )
+  
 )
 
 opt_parser = OptionParser(option_list = option_list);
@@ -98,12 +105,15 @@ if ( unlist(opt["input-folder"] == "") |
   }
 }
 
-
 if ( unlist( opt["run-preprocessing"] ) ) {
   source( file.path(source_path, "preprocessing_cropseq.R") )
 }
 
 if ( unlist( opt["run-carnival"] ) | 
      unlist( opt["test"] )       ) {
+  carnival_threads = unlist( opt["carnival-threads"] )
+  start_id = unlist( opt["start-uniprot-id"] )
+  end_id = unlist( opt["end-uniprot-id"] )
   source( file.path(source_path, "run_carnival_cropseq.R") )
 }
+

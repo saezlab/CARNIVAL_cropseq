@@ -37,9 +37,16 @@ if ( !exists( "opt" ) & "here" %in% (.packages()) ) {
 
 if ( exists( "opt" ) ) { 
   run_preprocessing = unlist( opt["run-preprocessing"] )
-  run_carnival = unlist( opt["run-carnival"] )
   test_run = unlist( opt["test"] )
-} 
+  run_carnival = unlist( opt["run-carnival"] )
+} else {
+  #TODO this breaks the logic what should go first where from run_carnival_cropseq.R; There are 3 cases of running: one script from RStudio, 
+  # Rscript from the console - separate out of pipeline. 
+  # Now it is also a problem with Rdata file.
+  run_preprocessing = FALSE
+  test_run = FALSE
+  run_carnival = TRUE
+}
 
 directories_to_check = c()
 files_to_check = c()
@@ -69,7 +76,9 @@ if ( exists("opt") && unlist(opt["default-input-output"]) ) {
 
 if ( exists( "opt" ) )  {
   Rdata_file = opt["rdata-file"]
-} 
+} else { 
+  Rdata_file = ""
+}
 
 intermediate_results_folder = file.path( output_folder, "intermediate_results/" )
 logfile = file.path( output_folder, paste0( "carnival_run_", format(Sys.time(), "%d_%m_%Y_%H_%M"), ".log" ) )

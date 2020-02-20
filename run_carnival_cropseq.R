@@ -56,6 +56,14 @@ if ( !exists("test_run") ) {
   test_run = FALSE  
 }
 
+if ( !exists("start_id") ) {
+  start_id = 1
+}
+
+if ( !exists("end_id") ) {
+  end_id = 30
+}
+
 ########################################################################################
 ### ------------ INSTALLING/LOADING NECESSARY PACKAGES ----------------------------- ###
 ########################################################################################
@@ -69,7 +77,9 @@ addHandler(writeToFile, logger = "CARNIVAL_run", file = logfile)
 loginfo("CARNIVAL script started", logger = "CARNIVAL_run.module")
 loginfo( paste0("Running CARNIVAL script with a setup: source path: ", source_path, ";", 
                " Is it a test run: ", test_run, ";",
-               " N threads:", carnival_threads), 
+               " N threads:", carnival_threads, ";",
+               " Start id: ", start_id, ";",
+               " End id: ", end_id), 
          logger = "CARNIVAL_run.module" )
 
 source( file.path(source_path, "utils_cropseq.R") )
@@ -77,7 +87,7 @@ source( file.path(source_path, "utils_cropseq.R") )
 ########################################################################################
 ### ------------ READING PREPROCESSED DATA OR RUNNING PREPROCESSING IF NEEDED ------ ###
 ########################################################################################
-if( file.exists(Rdata_file) ) {
+if ( file.exists(Rdata_file) ) {
     loginfo( "Loading preprocessed Rdata file", logger = "CARNIVAL_run.module" )
     load(Rdata_file)
 } else { 
@@ -145,7 +155,9 @@ RunCarnivalOnListGenes = function( uniprot_ids, tcr_genes_viper, prior_knowledge
 }
 
 loginfo( "Reading/requesting prior knowledge network", logger = "CARNIVAL_run.module" )
-prior_knowledge_network = LoadPKNForCarnival( omnipath_filename )
+prior_knowledge_network = LoadPKNForCarnival( omnipath_filename, filter_by_references = 1 )
+loginfo( paste("Prior knowledge network contains", dim(prior_knowledge_network)[1], "interactions" ), 
+         logger = "CARNIVAL_run.module" )
 
 if ( test_run ) {
   loginfo( "Test run of CARNIVAL is initiated", logger = "CARNIVAL_run.module" )
@@ -153,8 +165,8 @@ if ( test_run ) {
   RunCarnivalOnListGenes( uniprot_ids[28, ], tcr_genes_viper_naive, prior_knowledge_network, carnival_threads)
   loginfo( "Test run of CARNIVAL is finished", logger = "CARNIVAL_run.module" )
 } else {
-  RunCarnivalOnListGenes( uniprot_ids, tcr_genes_viper_naive, prior_knowledge_network, carnival_threads )
-  RunCarnivalOnListGenes( uniprot_ids, tcr_genes_viper_stimulated, prior_knowledge_network, carnival_threads )  
+  RunCarnivalOnListGenes( uniprot_ids[ c(start_id:end_id), ], tcr_genes_viper_naive, prior_knowledge_network, carnival_threads )
+  RunCarnivalOnListGenes( uniprot_ids[ c(start_id:end_id), ], tcr_genes_viper_stimulated, prior_knowledge_network, carnival_threads )  
 }
 
 loginfo( "ALL CARNIVAL RUNS DONE", logger = "CARNIVAL_run.module" )

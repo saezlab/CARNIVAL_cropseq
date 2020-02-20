@@ -42,7 +42,7 @@ CheckAndLoadLibraries( cran_list_packages, bioc_list_packages )
 
 
 # Reads Omnipath as a prior knowledge network for CARNIVAL run
-LoadPKNForCarnival = function( path_file = "" ) {
+LoadPKNForCarnival = function( path_file = "", filter_by_references = 0 ) {
 
   if ( !file.exists(path_file) ) {
     omnipath = import_Omnipath_Interactions(from_cache_file = NULL,
@@ -56,7 +56,11 @@ LoadPKNForCarnival = function( path_file = "" ) {
   }
 
   #TODO check with Denes/Enio that I am using the right columns here
-  omnipath_pkn = omnipath %>% filter( is_directed == 1 ) %>%
+  omnipath_pkn = omnipath %>% dplyr::filter( is_directed == 1 ) %>%
+                              dplyr::mutate_at( c("nrefs"), 
+                                                ~as.numeric(as.character(.))
+                                                ) %>%
+                              dplyr::filter( nrefs >= filter_by_references ) %>%
                               dplyr::select( "source", "target",
                                             "consensus_stimulation",
                                             "consensus_inhibition" ) %>%
@@ -76,6 +80,7 @@ LoadPKNForCarnival = function( path_file = "" ) {
 
   omnipath_pkn = omnipath_pkn %>% filter_at( vars(source, target),
                                              all_vars(!str_detect(., "COMPLEX:")) )
+  
 
   return( omnipath_pkn )
 }
