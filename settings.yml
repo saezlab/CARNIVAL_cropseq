@@ -1,0 +1,53 @@
+local: 
+  input_folder: ""
+  output_folder: ""
+  preprocessing: ""
+  test_run: ""
+  carnival_run: ""
+  n_threads: ""
+  solver_path: ""
+  dorothea_file: ""
+  PKN_file: ""
+  PKN_filter_references: 1 
+  Rdata_file: ""
+
+preprocessing: 
+  input_folder: 
+  output_folder: 
+  preprocessing: 
+  test_run:
+  carnival_run:
+  n_threads: 
+  solver_path: 
+  dorothea_file: 
+  PKN_file: 
+  PKN_filter_references: 1
+  Rdata_file: 
+
+test: 
+  input_folder: 
+  output_folder: 
+  preprocessing: 
+  test_run:
+  carnival_run:
+  n_threads: 
+  solver_path: 
+  dorothea_file: 
+  PKN_file: 
+  PKN_filter_references: 1
+  Rdata_file: 
+
+server: 
+  source_folder: ""
+  input_folder: ""
+  output_folder: ""
+  preprocessing: ""
+  test_run: ""
+  carnival_run: ""
+  n_threads: ""
+  solver_path: ""
+  dorothea_file: ""
+  PKN_file: ""
+  PKN_filter_references: 1
+  Rdata_file: ""
+  parallelize_runs: 4

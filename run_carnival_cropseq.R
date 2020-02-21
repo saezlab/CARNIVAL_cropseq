@@ -101,9 +101,8 @@ if ( file.exists(Rdata_file) ) {
 #########################################################################################################
 
 RunCarnivalOneTime = function( edited_gene_name, prior_knowledge_network, viper_scores, 
-                               perturbations, save_outfile = FALSE, 
-                               output_filename = "out_carnival.csv",
-                               output_dir = "", dot_figures = FALSE, 
+                               perturbations, output_filename = "out_carnival.csv",
+                               output_dir = "", produce_dot_figure = FALSE, 
                                threads = 0) { 
   
   res_carnival = runCARNIVAL(solverPath = cplex_solver_path, 
@@ -112,7 +111,7 @@ RunCarnivalOneTime = function( edited_gene_name, prior_knowledge_network, viper_
                              inputObj = perturbations,
                              solver = "cplex", 
                              dir_name = output_dir,
-                             DOTfig = FALSE,
+                             DOTfig = dot_figures,
                              threads = threads)
   if ( save_outfile ) { 
     results_carnival = res_carnival$weightedSIF %>% dplyr::select("Node1", "Node2", "Sign")
@@ -124,7 +123,7 @@ RunCarnivalOneTime = function( edited_gene_name, prior_knowledge_network, viper_
 }
 
 RunCarnivalOnListGenes = function( uniprot_ids, tcr_genes_viper, prior_knowledge_network, 
-                                   threads = 0) {
+                                   output_filename, threads = 0) {
   res_carnivals_genes = list() 
   for ( i in uniprot_ids$GENES ) { 
     loginfo( paste("Running CARNIVAL for naive (TCR) data, gene: ", i), 
@@ -143,11 +142,10 @@ RunCarnivalOnListGenes = function( uniprot_ids, tcr_genes_viper, prior_knowledge
     colnames(viper_scores) = ReadDorotheaMapping( tf_names, dorothea_tf_mapping_filename )$UNIPROT
     
     res_carn = RunCarnivalOneTime(i, prior_knowledge_network, viper_scores, perturbations,
-                                  output_dir = output_directory_carnival,
-                                  save_outfile = TRUE, 
-                                  output_filename = paste0("out_carnival_naive", i, ".csv"),
+                                  output_dir = paste0( output_directory_carnival, "_", edited_gene_name ),
+                                  output_filename = output_filename,
                                   threads = threads,
-                                  dot_figures = TRUE)
+                                  produce_dot_figure = TRUE)
     
     res_carnivals_genes[[i]] = res_carn
   }
@@ -165,8 +163,14 @@ if ( test_run ) {
   RunCarnivalOnListGenes( uniprot_ids[28, ], tcr_genes_viper_naive, prior_knowledge_network, carnival_threads)
   loginfo( "Test run of CARNIVAL is finished", logger = "CARNIVAL_run.module" )
 } else {
-  RunCarnivalOnListGenes( uniprot_ids[ c(start_id:end_id), ], tcr_genes_viper_naive, prior_knowledge_network, carnival_threads )
-  RunCarnivalOnListGenes( uniprot_ids[ c(start_id:end_id), ], tcr_genes_viper_stimulated, prior_knowledge_network, carnival_threads )  
+  RunCarnivalOnListGenes( uniprot_ids[ c(start_id:end_id), ], tcr_genes_viper_naive, 
+                          prior_knowledge_network, 
+                          output_filename = paste0("out_carnival_naive_", i, ".csv"), 
+                          carnival_threads )
+  RunCarnivalOnListGenes( uniprot_ids[ c(start_id:end_id), ], tcr_genes_viper_stimulated, 
+                          prior_knowledge_network, 
+                          output_filename = paste0("out_carnival_stimulated_", i, ".csv")
+                          carnival_threads )  
 }
 
 loginfo( "ALL CARNIVAL RUNS DONE", logger = "CARNIVAL_run.module" )
