@@ -137,37 +137,3 @@ if ( run_carnival ) {
   files_to_check = c( files_to_check, cplex_solver_path, omnipath_filename, 
                       dorothea_tf_mapping_filename )  
 }
-
-########################################################################################
-### ------------ CHECKING PROVIDED DIRECTORIES AND FILES  -------------------------- ###
-########################################################################################
-
-CreateDirectoriesIfDontExist = function( sub_dir, main_dir = "", needed_main_dir = F ) {
-  if ( main_dir == "" & needed_main_dir ) {
-    main_dir = getwd()  
-  }
-  dir.create( file.path(main_dir, sub_dir), showWarnings = FALSE )
-}
-
-CheckFile = function( filename, path = "" ) {
-  full_filename = file.path( path, filename )
-  if( !file.exists(full_filename) ) {
-    stop( paste( "Cannot find the speficied file! Check provided path:", full_filename ) )
-  }
-}
-
-tryCatch( 
-  expr = { 
-      invisible( sapply(directories_to_check, CreateDirectoriesIfDontExist) )
-  }, 
-  error = function(e) { 
-      message( "Cannot create directories. Please specify correct paths." )
-      print(e)
-      stop()
-  }
-)
-
-invisible( sapply(files_to_check, CheckFile) )
-
-print( paste0("All directories for a run:", paste0(directories_to_check, collapse = "\n, ")) )
-print( paste0("All specified input files for a run:", paste0(files_to_check, collapse = "\n, ")) )

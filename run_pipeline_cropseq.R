@@ -34,44 +34,26 @@ if ( !require("optparse") ) {
   install.packages("optparse")
 }
 
+if ( !require("yaml") ) { 
+  install.packages("yaml")
+}
+
 option_list = list(
-  make_option( c("-a", "--run-preprocessing"), type = "logical", default = FALSE, action = "store_true",
-                help = "Specify if the data should be preprocessed first (Seurat + VIPER/DoRothEA)", 
-                metavar = "logical" ), 
-  
-  make_option( c("-t", "--test"), type = "logical", default = FALSE, action = "store_true",
-               help = "Run CARNIVAL for one gene. Should be run together with -p option or RData file (in paths.R) 
-                       with preprocessed data should be prodived", metavar = "logical" ),
-  
-  make_option( c("-c", "--run-carnival"), type = "logical", default = FALSE, action = "store_true",
-               help = "Provide source path for the run", metavar = "logical" ), 
-  
-  make_option( c("-s", "--source-path"), type = "character", default = "", 
-                help = "Provide source path (with code) for the run", metavar = "character" ), 
-  
-    make_option( c("-d", "--rdata-file"), type = "character", default = "",
-               help = "Specify the full path to R data file if preprocessing has been done before", 
+  make_option( c("-f", "--settings-file"), type = "character", default = "settings.yml", 
+               help = "Specify settings file location", 
                metavar = "character" ), 
   
-  make_option( c("-u", "--default-input-output"), type = "logical", default = FALSE, action = "store_true",
-               help = "Specify if the data should be preprocessed first (Seurat + VIPER/DoRothEA)", 
-               metavar = "logical" ), 
+  make_option( c("-t", "--test"), type = "logical", default = FALSE, action = "store_true",
+               help = "Add the option if running on the server if running in a test mode",
+               metavar = "logical" ),
   
-  make_option( c("-i", "--input-folder"), type = "character", default = "", 
-               help = "Provide input folder", metavar = "character" ),
+  make_option( c("-l", "--local"), type = "logical", default = FALSE, action = "store_true",
+               help = "Add the option if running on the local machine",
+               metavar = "logical" ),
   
-  make_option( c("-o", "--output-folder"), type = "character", default = "", 
-               help = "Provide output folder", metavar = "character" ),
-  
-  make_option( c("-r", "--carnival-threads"), type = "numeric", default = 0, 
-                help = "Provide number of threads to run CARNIVAL", metavar = "numeric" ),
-  
-  make_option( c("-b", "--start-uniprot-id"), type = "numeric", default = 1, 
-               help = "Provide starting id (out of 30 max)", metavar = "numeric" ),
-  
-  make_option( c("-e", "--end-uniprot-id"), type = "numeric", default = 30, 
-               help = "Provide ending id (out of 30 max)", metavar = "numeric" )
-  
+  make_option( c("-s", "--server"), type = "logical", default = FALSE, action = "store_true",
+                help = "Add the option if running on the server",
+                metavar = "logical" )
 )
 
 opt_parser = OptionParser(option_list = option_list);
@@ -80,40 +62,54 @@ opt = parse_args(opt_parser)
 print( "Initiating the script with parameters: " )
 print( opt )
 
-if ( !( unlist(opt["run-preprocessing"]) |
-        unlist(opt["test"]) | 
-        unlist(opt["run-carnival"]) )    ) {
+server_run = unlist( opt["server"] )
+test_run = unlist( opt["test"] )
+local_run = unlist( opt["local"] )
+settings_file = unlist( opt["settings-file"])
+
+if ( !( server_run || test_run || local_run ) )   {
   print_help( opt_parser )
-  stop("Nothing to run. At least one argument must be supplied: -p, -t or -c", call. = FALSE)
+  stop("Nothing to run. At least one argument must be supplied: -r, -t, or -l", call. = FALSE)
 }
 
-if ( opt["source-path"] != "") {
-  source_path = opt["source-path"]
-} else if ( "here" %in% (.packages()) ) {
-  source_path = here()
-  print( paste0("Source path was not provided. Using the path provided by here() library:", source_path) )
+if ( server_run & test_run & local_run ) {
+  print_help( opt_parser )
+  stop("Conflicting arguments provided. Please specify only one option from these: -r, -t, or -l", call. = FALSE)
+}
+
+if ( file.exists(settings_file) ) { 
+  settings = yaml.load_file( settings_file )
+} else { 
+  print_help( opt_parser )
+  stop("Please specify a correct location for settings file using -f option.", call. = FALSE)
+}
+
+if ( test_run ) { 
+  settings_run = settings$test
+} else if ( local_run ) {
+  settings_run = settings$local
+} else if ( server_run ) {
+  settings_run = settings$server
+}
+
+print( cat("Specified options for a run:", paste0(settings_run, collapse = " \n "))  )
+
+source_folder = settings_run$source_folder
+
+if ( source_folder == "" && "here" %in% (.packages()) ) {
+  source_folder = here()
+  print( paste0("Source folder was not provided. Using the path provided by here() library:", source_folder) )
+} else if (source_folder == "" && !"here" %in% (.packages()) ) {
+  print( paste0("Source folder was not provided. Using: ", source_folder) )
+}
+
+if ( dir.exists(source_folder) ) { 
+  source( file.path(source_folder, "setting_up_pipeline.R") )
+  if ( settings_run$preprocessing ) {
+    source( file.path(source_folder, "preprocessing_cropseq.R") )
+  } 
+  source( file.path(source_folder, "run_carnival_cropseq.R") )
 } else {
-  source_path = ""  
-  print( paste0("Source path was not provided. Using: ", source_path) )
-}
-
-if ( unlist(opt["input-folder"] == "") |
-     unlist(opt["output-folder"]) == "")  {
-  if ( !unlist( opt["default-input-output"] ) ) { 
-    print_help( opt_parser )
-    stop("Please provide input/output folders for the run", call. = FALSE)  
-  }
-}
-
-if ( unlist( opt["run-preprocessing"] ) ) {
-  source( file.path(source_path, "preprocessing_cropseq.R") )
-}
-
-if ( unlist( opt["run-carnival"] ) | 
-     unlist( opt["test"] )       ) {
-  carnival_threads = unlist( opt["carnival-threads"] )
-  start_id = unlist( opt["start-uniprot-id"] )
-  end_id = unlist( opt["end-uniprot-id"] )
-  source( file.path(source_path, "run_carnival_cropseq.R") )
+  stop("Please specify a correct location for source R files in settings.yml", call. = FALSE)
 }
 

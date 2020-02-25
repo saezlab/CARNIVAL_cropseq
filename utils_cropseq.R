@@ -26,15 +26,16 @@ if ( !require("here") ) {
   install.packages("here")
 }
 
-# Reassigne source path if the script is being executed from run_pipeline_cropseq.R
-if ( exists( "opt" ) && opt["source-path"] != "" )  {
-  source_path = opt['source-path']
-} else if ( "here" %in% (.packages()) ) {
-  source_path = here()
-} else {
-  source_path = ""  
-}
-source( file.path(source_path, "packages_utils.R") )
+# Reassign source path if the script is being executed from run_pipeline_cropseq.R
+# if ( exists( "opt" ) && opt["source-path"] != "" )  {
+#   source_path = opt['source-path']
+# } else if ( "here" %in% (.packages()) ) {
+#   source_path = here()
+# } else {
+#   source_path = ""  
+# }
+
+source( file.path(source_folder, "packages_utils.R") )
 
 cran_list_packages = c("dplyr", "stringr", "purrr")
 bioc_list_packages = c("biomaRt", "UniProt.ws", "OmnipathR")

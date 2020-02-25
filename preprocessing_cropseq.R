@@ -34,15 +34,14 @@ if ( !require("here") ) {
 ########################################################################################
 ### ------ SETTING UP DEFAULT PARAMETERS (if running as a standalone script) ------- ###
 ######################################################################################## 
-if ( !exists("source_path") && "here" %in% (.packages()) ) {
-  source_path = here()
-} else if ( !exists("source_path") ) {
-  source_path = ""  
+if ( !exists("source_folder") && "here" %in% (.packages()) ) {
+  source_folder = here()
+} else if ( !exists("source_folder") ) {
+  source_folder = ""  
 }
 
-print(source_path)
-source( file.path(source_path, "packages_utils.R") )
-source( file.path(source_path, "paths.R") )
+print(source_folder)
+source( file.path(source_folder, "packages_utils.R") )
 
 if ( !exists("run_preprocessing") ) {
   run_preprocessing = TRUE  
@@ -51,7 +50,7 @@ if ( !exists("run_preprocessing") ) {
 ########################################################################################
 ### ------------ INSTALLING/LOADING NECESSARY PACKAGES ----------------------------- ###
 ########################################################################################
-
+t
 cran_list_packages = c("dplyr","readr", "stringr", "purrr", "tibble", "tidyr",
                        "Seurat", "logging", "BiocManager", "devtools")
 bioc_list_packages = c("viper", "biomaRt", "UniProt.ws", "rhdf5")
@@ -62,8 +61,8 @@ basicConfig(level = "DEBUG")
 addHandler(writeToFile, logger = "preprocessing_run", file = logfile)
 loginfo("Preprocessing script started", logger = "preprocessing_run.module")
 
-source( file.path(source_path, "utils_CARNIVAL.R") )
-source( file.path(source_path, "utils_cropseq.R") )
+source( file.path(source_folder, "utils_CARNIVAL.R") )
+source( file.path(source_folder, "utils_cropseq.R") )
 
 ########################################################################################
 ### ------------ READING THE DATA -------------------------------------------------- ###
