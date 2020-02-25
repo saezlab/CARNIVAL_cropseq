@@ -1,21 +1,14 @@
 This code is a first try out to run CARNIVAL on CRISPR-CAS9 perturbation data: [Crop-Seq](http://www.medical-epigenomics.org/papers/datlinger2017/).
 
 ## How to use: 
-Change all of the paths to your local ones in <b>paths.R</b> <br/> 
+Change settings and all of the paths in <b>settings.yml</b> <br/> in the corresponding profile (e.g. local) 
 Then run in console:
 
-### Test run
+### Local run
 ```
-Rscript run_pipeline_cropseq.R -t
+Rscript run_pipeline_cropseq.R -f settings_yml_path -l  
 ```
-### Preprocessing run 
-```
-Rscript run_pipeline_cropseq.R -p
-```
-### CARNIVAL run 
-```
-Rscript run_pipeline_cropseq.R -p
-```
+
 ### Help with description of all options
 ```
 Rscript run_pipeline_cropseq.R -h
