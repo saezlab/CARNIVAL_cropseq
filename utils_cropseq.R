@@ -23,19 +23,24 @@
 # ====================
 
 if ( !require("here") ) { 
-  install.packages("here")
+  tryCatch( {
+    install.packages("here")  
+  }, error = function(e) {
+    print("Unable to install package 'here'. Continuing without it.")
+  })
 }
 
-# Reassign source path if the script is being executed from run_pipeline_cropseq.R
-# if ( exists( "opt" ) && opt["source-path"] != "" )  {
-#   source_path = opt['source-path']
-# } else if ( "here" %in% (.packages()) ) {
-#   source_path = here()
-# } else {
-#   source_path = ""  
-# }
+if ( (!exists("source_folder") || source_folder == "") && "here" %in% (.packages()) ) {
+  source_folder = here()
+} else if ( !exists("source_folder") && !("here" %in% (.packages()))  ) {
+  source_folder = ""  
+}
 
-source( file.path(source_folder, "packages_utils.R") )
+if ( dir.exists(source_folder) ) {
+  source( file.path(source_folder, "packages_utils.R") )
+} else {
+  stop("utils_cropseq.R: can't continue, please specify correct source folder")
+}
 
 cran_list_packages = c("dplyr", "stringr", "purrr")
 bioc_list_packages = c("biomaRt", "UniProt.ws", "OmnipathR")

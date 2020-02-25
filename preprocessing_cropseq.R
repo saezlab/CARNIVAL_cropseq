@@ -34,23 +34,49 @@ if ( !require("here") ) {
 ########################################################################################
 ### ------ SETTING UP DEFAULT PARAMETERS (if running as a standalone script) ------- ###
 ######################################################################################## 
-if ( !exists("source_folder") && "here" %in% (.packages()) ) {
+
+if ( (!exists("source_folder") || source_folder == "") && "here" %in% (.packages()) ) {
   source_folder = here()
 } else if ( !exists("source_folder") ) {
   source_folder = ""  
 }
 
-print(source_folder)
-source( file.path(source_folder, "packages_utils.R") )
+if ( !exists("settings_run") ) {
+  
+  if ( !require("yaml") ) { 
+    install.packages("yaml")
+  }
+  
+  if ("here" %in% (.packages()) ) {
+    source_folder = here()   
+  } else {
+    source_folder = ""
+  }
+  
+  settings_file = file.path( source_folder, "settings.yml" )
+  
+  if ( file.exists(settings_file) ) { 
+    settings_run = yaml.load_file( settings_file )$local
+  } else {
+    stop("Can't continue, please specify correct path to settings file")
+  }
+}
 
-if ( !exists("run_preprocessing") ) {
-  run_preprocessing = TRUE  
+if ( dir.exists(source_folder) ) {
+  source( file.path(source_folder, "setting_up_pipeline.R") )
+  source( file.path(source_folder, "packages_utils.R") )  
+} else {
+  stop("processing_cropseq.R: can't continue, please specify correct source folder")
+}
+
+if ( !preprocessing ) {
+  preprocessing = TRUE  
 }
 
 ########################################################################################
 ### ------------ INSTALLING/LOADING NECESSARY PACKAGES ----------------------------- ###
 ########################################################################################
-t
+
 cran_list_packages = c("dplyr","readr", "stringr", "purrr", "tibble", "tidyr",
                        "Seurat", "logging", "BiocManager", "devtools")
 bioc_list_packages = c("viper", "biomaRt", "UniProt.ws", "rhdf5")

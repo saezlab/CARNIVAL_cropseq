@@ -41,7 +41,7 @@ carnival_run = settings_run$carnival_run
 
 
 CARNIVAL_installation_path =  settings_run$CARNIVAL_installation_path
-n_threads = settings_run$n_threads
+carnival_threads = settings_run$carnival_threads
 solver_path = settings_run$solver_path
 Rdata_file = file.path ( output_folder, settings_run$Rdata_file )
 
@@ -50,7 +50,20 @@ PKN_filter_references = settings_run$PKN_filter_references
 start_id = settings_run$start_id
 end_id = settings_run$end_id
 
+
+
+########################################################################################
+### ------------ FURTHER SETTING UP THE PARAMETERS --------------------------------- ###
+########################################################################################
 logfile = file.path( output_folder, paste0( "carnival_run_", format(Sys.time(), "%d_%m_%Y_%H_%M"), ".log" ) )
+
+if ( start_id == -1  ) {
+  start_id = 1
+}
+
+if ( end_id == -1) {
+  end_id = 30
+}
 
 directories_to_check = c( base_path, input_folder, output_folder, intermediate_results_folder )
 directories_to_check = directories_to_check[ directories_to_check != '']

@@ -11,7 +11,7 @@ local:
   preprocessing: FALSE
   test_run: FALSE
   carnival_run: TRUE
-  n_threads: 20
+  carnival_threads: 20
   solver_path: "/Applications/CPLEX_Studio1210/cplex/bin/x86-64_osx/cplex"
   dorothea_mapping_file: "dorothea_TF_mapping.csv"
   PKN_file: "PKNs/omnipath_10_02_2020_13_46.txt"
@@ -28,7 +28,7 @@ test:
   preprocessing: FALSE
   test_run: TRUE
   carnival_run: FALSE
-  n_threads: 1
+  carnival_threads: 1
   solver_path: "/Applications/CPLEX_Studio1210/cplex/bin/x86-64_osx/cplex"
   dorothea_mapping_file: "input/dorothea_TF_mapping.csv"
   PKN_file: "input/PKNs"
@@ -45,7 +45,7 @@ server:
   preprocessing: FALSE
   test_run: FALSE
   carnival_run: TRUE
-  n_threads: 20
+  carnival_threads: 20
   solver_path: "/net/data.isilon/ag-saez/bq_oivanova/carnival_cropseq_runs/cplex_installation/cplex/bin/x86-64_linux/cplex"
   dorothea_mapping_file: "dorothea_TF_mapping.csv"
   PKN_file: "PKNs/omnipath_10_02_2020_13_46.txt"
