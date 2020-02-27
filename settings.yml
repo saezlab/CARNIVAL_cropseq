@@ -20,6 +20,8 @@ local:
   CARNIVAL_installation_path:  "https://github.com/saezlab/CARNIVAL-Bioconductor-Dev"
   start_id: -1
   end_id: -1
+  run_naive: TRUE
+  run_stimulated: TRUE
 test: 
   source_folder: ""
   base_path: "/Users/olgaivanova/GoogleDrive/_PhD_Heidelberg/*CARNIVAL/CARNIVAL_Cropseq_github/"
@@ -35,6 +37,10 @@ test:
   PKN_filter_references: 1 
   Rdata_file: "output/intermediate_results/carnival_run_14_02_2020_22_20.Rdata"
   CARNIVAL_installation_path:  "https://github.com/saezlab/CARNIVAL-Bioconductor-Dev"
+  start_id: -1
+  end_id: -1
+  run_naive: TRUE
+  run_stimulated: TRUE
 server: 
   source_folder: "/net/data.isilon/ag-saez/bq_oivanova/carnival_cropseq_runs/code"
   base_path: ""
@@ -54,3 +60,5 @@ server:
   CARNIVAL_installation_path:  "https://github.com/saezlab/CARNIVAL-Bioconductor-Dev"
   start_id: -1
   end_id: -1
+  run_naive: TRUE
+  run_stimulated: TRUE

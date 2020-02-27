@@ -50,7 +50,8 @@ PKN_filter_references = settings_run$PKN_filter_references
 start_id = settings_run$start_id
 end_id = settings_run$end_id
 
-
+run_naive = settings$run_naive
+run_stimulated = settings$run_stimulated
 
 ########################################################################################
 ### ------------ FURTHER SETTING UP THE PARAMETERS --------------------------------- ###

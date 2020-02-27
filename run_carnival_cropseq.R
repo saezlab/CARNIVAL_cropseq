@@ -70,7 +70,7 @@ if ( dir.exists(source_folder) ) {
   stop("run_carnival_cropseq.R: can't continue, please specify correct source folder")
 }
 
-if ( !carnival_run && !test_run) {
+if ( !carnival_run && !test_run ) {
   carnival_run = TRUE
   test_run = FALSE
 } 
@@ -123,13 +123,14 @@ RunCarnivalOneTime = function( edited_gene_name, prior_knowledge_network, viper_
                              solver = "cplex", 
                              dir_name = output_dir,
                              DOTfig = produce_dot_figure,
+                             timelimit = 10000,
                              threads = threads)
   if ( save_outfile ) { 
     results_carnival = res_carnival$weightedSIF %>% as_tibble() %>% 
                                                 dplyr::select("Node1", "Node2", "Sign")
     write.csv( results_carnival, file = file.path( output_dir, output_filename ), 
                quote = FALSE, row.names = FALSE ) 
-  }
+  } 
   
   return( res_carnival )
 }
@@ -169,7 +170,7 @@ RunCarnivalOnListGenes = function( uniprot_ids, tcr_genes_viper, prior_knowledge
         
         res_carnivals_genes[[i]] = res_carn
     }, error = function( e ) {
-        loginfo( paste("Cannot process data for ", i, ":", e ), 
+        loginfo( paste("Cannot process data for", i, ":", e ), 
                logger = "CARNIVAL_run.module" )
       }
     )
@@ -189,12 +190,19 @@ if ( test_run ) {
   RunCarnivalOnListGenes( uniprot_ids[28, ], tcr_genes_viper_naive, prior_knowledge_network, carnival_threads)
   loginfo( "Test run of CARNIVAL is finished", logger = "CARNIVAL_run.module" )
 } else {
-  RunCarnivalOnListGenes( uniprot_ids[ c(start_id:end_id), ], tcr_genes_viper_naive, 
-                          prior_knowledge_network, 
-                          carnival_threads, naive = TRUE )
-  RunCarnivalOnListGenes( uniprot_ids[ c(start_id:end_id), ], tcr_genes_viper_stimulated, 
-                          prior_knowledge_network, 
-                          carnival_threads )  
+  
+  if (run_naive) {
+    RunCarnivalOnListGenes( uniprot_ids[ c(start_id:end_id), ], tcr_genes_viper_naive, 
+                            prior_knowledge_network, 
+                            carnival_threads, naive = TRUE )  
+  }
+  
+  if (run_stimulated) { 
+    RunCarnivalOnListGenes( uniprot_ids[ c(start_id:end_id), ], tcr_genes_viper_stimulated, 
+                            prior_knowledge_network, 
+                            carnival_threads )  
+  }
+  
 }
 
 loginfo( "ALL CARNIVAL RUNS DONE", logger = "CARNIVAL_run.module" )
