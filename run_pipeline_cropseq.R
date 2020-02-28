@@ -92,6 +92,7 @@ if ( test_run ) {
   settings_run = settings$server
 }
 
+settings_run = settings_run[ settings_run != "" ]
 print( cat("Specified options for a run:", paste0(settings_run, collapse = " \n "))  )
 source_folder = settings_run$source_folder
 

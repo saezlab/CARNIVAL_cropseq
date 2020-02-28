@@ -50,8 +50,8 @@ PKN_filter_references = settings_run$PKN_filter_references
 start_id = settings_run$start_id
 end_id = settings_run$end_id
 
-run_naive = settings$run_naive
-run_stimulated = settings$run_stimulated
+run_naive = settings_run$run_naive
+run_stimulated = settings_run$run_stimulated
 
 ########################################################################################
 ### ------------ FURTHER SETTING UP THE PARAMETERS --------------------------------- ###
@@ -110,6 +110,7 @@ tryCatch(
 )
 
 invisible( sapply(files_to_check, CheckFile) )
+
 
 print( cat("All directories for a run:", paste0(directories_to_check, collapse = " \n ")) )
 print( cat("All specified input files for a run:", paste0(files_to_check, collapse = " \n ")) )

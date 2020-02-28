@@ -139,42 +139,40 @@ RunCarnivalOnListGenes = function( uniprot_ids, tcr_genes_viper, prior_knowledge
                                    naive = FALSE) {
   res_carnivals_genes = list() 
   
+  if ( naive ) {
+    file_prefix = "naive"
+  } else { 
+    file_prefix = "stimulated"
+  }
+  
   for ( i in uniprot_ids$GENES ) { 
     loginfo( paste("Running CARNIVAL for (TCR) data, gene: ", i), 
              logger = "CARNIVAL_run.module" )
-    uniprot_id = uniprot_ids %>% dplyr::filter( GENES == i ) 
-    perturbations = data.frame( "1" )
-    names(perturbations) = uniprot_id$UNIPROTKB
-    
-    viper_scores = tcr_genes_viper %>% as_tibble( rownames = "id" ) %>% 
-      dplyr::select( id, all_of(i) ) %>% 
-      drop_na() %>% 
-      spread(id, i) %>% 
-      as.data.frame()
-    
-    tf_names = colnames(viper_scores)
-    colnames(viper_scores) = ReadDorotheaMapping( tf_names, dorothea_mapping_file )$UNIPROT
-    
-    if ( naive ) {
-      file_prefix = "naive"
-    } else { 
-      file_prefix = "stimulated"
-    }
-    
     tryCatch({
-        res_carn = RunCarnivalOneTime( i, prior_knowledge_network, viper_scores, perturbations,
-                                       output_dir = file.path( output_folder, i ),
-                                       output_filename = paste0("out_carnival_", file_prefix, i, ".csv"),
-                                       produce_dot_figure = TRUE,
-                                       threads = threads )
+      uniprot_id = uniprot_ids %>% dplyr::filter( GENES == i ) 
+      perturbations = data.frame( "1" )
+      names(perturbations) = uniprot_id$UNIPROTKB
+    
+      viper_scores = tcr_genes_viper %>% as_tibble( rownames = "id" ) %>% 
+                                         dplyr::select( id, all_of(i) ) %>% 
+                                         drop_na() %>% 
+                                         spread(id, i) %>% 
+                                         as.data.frame()
+    
+      tf_names = colnames(viper_scores)
+      colnames(viper_scores) = ReadDorotheaMapping( tf_names, dorothea_mapping_file )$UNIPROT
+  
+      res_carn = RunCarnivalOneTime( i, prior_knowledge_network, viper_scores, perturbations,
+                                    output_dir = file.path( output_folder, i ),
+                                    output_filename = paste0("out_carnival_", file_prefix, i, ".csv"),
+                                    produce_dot_figure = TRUE,
+                                    threads = threads )
         
-        res_carnivals_genes[[i]] = res_carn
+      res_carnivals_genes[[i]] = res_carn
     }, error = function( e ) {
         loginfo( paste("Cannot process data for", i, ":", e ), 
                logger = "CARNIVAL_run.module" )
-      }
-    )
-    
+    })
   }
   return( res_carnivals_genes )
 }

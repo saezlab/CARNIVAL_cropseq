@@ -1,12 +1,12 @@
-# To download the last version of the data use the link below: 
-# https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE137554 
+# To download the last version of the data use the link below:
+# https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE137554
 
-local: 
+local:
   source_folder: "/Users/olgaivanova/GoogleDrive/_PhD_Heidelberg/*CARNIVAL/CARNIVAL_Cropseq_github/"
   base_path: "/Users/olgaivanova/GoogleDrive/_PhD_Heidelberg/*CARNIVAL/CARNIVAL_Cropseq_github/"
   input_folder: "input"
   raw_file: "GSE137554_raw_gene_bc_matrices_h5.h5"
-  annotation_file: "GSE137554_CellAnnotation.tsv" 
+  annotation_file: "GSE137554_CellAnnotation.tsv"
   output_folder: "output"
   preprocessing: FALSE
   test_run: FALSE
@@ -15,14 +15,14 @@ local:
   solver_path: "/Applications/CPLEX_Studio1210/cplex/bin/x86-64_osx/cplex"
   dorothea_mapping_file: "dorothea_TF_mapping.csv"
   PKN_file: "PKNs/omnipath_10_02_2020_13_46.txt"
-  PKN_filter_references: 1 
+  PKN_filter_references: 1
   Rdata_file: "/intermediate_results/carnival_run_14_02_2020_22_20.Rdata"
   CARNIVAL_installation_path:  "https://github.com/saezlab/CARNIVAL-Bioconductor-Dev"
   start_id: -1
   end_id: -1
   run_naive: TRUE
-  run_stimulated: TRUE
-test: 
+  run_stimulated: FALSE
+test:
   source_folder: ""
   base_path: "/Users/olgaivanova/GoogleDrive/_PhD_Heidelberg/*CARNIVAL/CARNIVAL_Cropseq_github/"
   input_folder: "input"
@@ -34,20 +34,20 @@ test:
   solver_path: "/Applications/CPLEX_Studio1210/cplex/bin/x86-64_osx/cplex"
   dorothea_mapping_file: "input/dorothea_TF_mapping.csv"
   PKN_file: "input/PKNs"
-  PKN_filter_references: 1 
+  PKN_filter_references: 1
   Rdata_file: "output/intermediate_results/carnival_run_14_02_2020_22_20.Rdata"
   CARNIVAL_installation_path:  "https://github.com/saezlab/CARNIVAL-Bioconductor-Dev"
   start_id: -1
   end_id: -1
   run_naive: TRUE
   run_stimulated: TRUE
-server: 
+server:
   source_folder: "/net/data.isilon/ag-saez/bq_oivanova/carnival_cropseq_runs/code"
   base_path: ""
   input_folder: "/home/bq_oivanova/carnival_cropseq_runs/input"
   output_folder: "/home/bq_oivanova/carnival_cropseq_runs/output"
   raw_file: ""
-  annotation_file: "" 
+  annotation_file: ""
   preprocessing: FALSE
   test_run: FALSE
   carnival_run: TRUE
