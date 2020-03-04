@@ -1,0 +1,9 @@
+digraph {
+
+Q9BYV9->P17861 [penwidth=1, color=red, arrowhead="tee"]
+Q9BYV9 [style=filled, color=black, fillcolor=lavender, shape=invhouse];
+Q9BYV9 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+P17861 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+
+
+}

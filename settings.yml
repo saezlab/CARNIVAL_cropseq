@@ -3,6 +3,7 @@
 
 local:
   source_folder: "/Users/olgaivanova/GoogleDrive/_PhD_Heidelberg/*CARNIVAL/CARNIVAL_Cropseq_github/"
+  working_dir: ""
   base_path: "/Users/olgaivanova/GoogleDrive/_PhD_Heidelberg/*CARNIVAL/CARNIVAL_Cropseq_github/"
   input_folder: "input"
   raw_file: "GSE137554_raw_gene_bc_matrices_h5.h5"
@@ -24,6 +25,7 @@ local:
   run_stimulated: FALSE
 test:
   source_folder: ""
+  working_dir: ""
   base_path: "/Users/olgaivanova/GoogleDrive/_PhD_Heidelberg/*CARNIVAL/CARNIVAL_Cropseq_github/"
   input_folder: "input"
   output_folder: "output"
@@ -43,6 +45,7 @@ test:
   run_stimulated: TRUE
 server:
   source_folder: "/net/data.isilon/ag-saez/bq_oivanova/carnival_cropseq_runs/code"
+  working_dir: ""
   base_path: ""
   input_folder: "/home/bq_oivanova/carnival_cropseq_runs/input"
   output_folder: "/home/bq_oivanova/carnival_cropseq_runs/output"
@@ -58,7 +61,7 @@ server:
   PKN_filter_references: 1
   Rdata_file: "intermediate_results/carnival_run_14_02_2020_22_20.Rdata"
   CARNIVAL_installation_path:  "https://github.com/saezlab/CARNIVAL-Bioconductor-Dev"
-  start_id: -1
+  start_id: -1 
   end_id: -1
   run_naive: TRUE
   run_stimulated: TRUE

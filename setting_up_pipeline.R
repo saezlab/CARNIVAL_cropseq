@@ -22,6 +22,10 @@
 # DESCRIPTION
 # File contains the set up for the pipeline of DoRothEA/VIPER-CARNIVAL.  
 # ====================
+if ( !exists("working_dir") ) {
+  # if working_dir is not specified from the console arguments, read from the .yml file
+  working_dir = settings_run$working_dir  
+}
 
 base_path = settings_run$base_path
 input_folder = file.path( base_path, settings_run$input_folder )
@@ -47,8 +51,12 @@ Rdata_file = file.path ( output_folder, settings_run$Rdata_file )
 
 PKN_filter_references = settings_run$PKN_filter_references
 
-start_id = settings_run$start_id
-end_id = settings_run$end_id
+if ( !exists("start_id") || !exists("end_id") ) {
+  # if start_id and end_id are not specified from the console,arguments read from the .yml file
+  start_id = settings_run$start_id
+  end_id = settings_run$end_id
+  
+}
 
 run_naive = settings_run$run_naive
 run_stimulated = settings_run$run_stimulated
@@ -73,7 +81,7 @@ files_to_check = c()
 if ( preprocessing ) {
   files_to_check = c( raw_file, annotation_file )
   Rdata_file = file.path( intermediate_results_folder, 
-                          paste0("carnival_run_", format(Sys.time(), "%d_%m_%Y_%H_%M"), ".Rdata") )
+                          paste0("carnival_run_", format(Sys.time(), "%d_%m_%Y_%H_%M_%S"), ".Rdata") )
 } else {
   files_to_check = c( Rdata_file )
 }
@@ -111,6 +119,5 @@ tryCatch(
 
 invisible( sapply(files_to_check, CheckFile) )
 
-
-print( cat("All directories for a run:", paste0(directories_to_check, collapse = " \n ")) )
-print( cat("All specified input files for a run:", paste0(files_to_check, collapse = " \n ")) )
+cat("All directories for a run:", " \n ", paste0(directories_to_check, collapse = " \n "), " \n ")
+cat("All specified input files for a run:", " \n ", paste0(files_to_check, collapse = " \n "), " \n ")

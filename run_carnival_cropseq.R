@@ -61,23 +61,28 @@ if ( !exists("settings_run") ) {
   } else {
     stop("Can't continue, please specify correct path to settings file")
   }
+  
+  if ( dir.exists(source_folder) ) {
+    source( file.path(source_folder, "setting_up_pipeline.R") )
+    source( file.path(source_folder, "packages_utils.R") )  
+  } else {
+    stop("run_carnival_cropseq.R: can't continue, please specify correct source folder")
+  }
 }
 
+########################################################################################
+### ------------ INSTALLING/LOADING NECESSARY PACKAGES ----------------------------- ###
+########################################################################################
+# TODO this will be removed once there will be a setup of directory for temp files in Bioconductor version of CARNIVAL
+setwd(working_dir)
+print( paste("Current working directory:", getwd()) ) 
+
 if ( dir.exists(source_folder) ) {
-  source( file.path(source_folder, "setting_up_pipeline.R") )
   source( file.path(source_folder, "packages_utils.R") )  
 } else {
   stop("run_carnival_cropseq.R: can't continue, please specify correct source folder")
 }
 
-if ( !carnival_run && !test_run ) {
-  carnival_run = TRUE
-  test_run = FALSE
-} 
-
-########################################################################################
-### ------------ INSTALLING/LOADING NECESSARY PACKAGES ----------------------------- ###
-########################################################################################
 cran_list_packages = c("dplyr", "logging", "tidyr", "yaml")
 bioc_list_packages = c("OmnipathR")
 github_packages    = c("CARNIVAL" = CARNIVAL_installation_path)
@@ -92,6 +97,7 @@ loginfo( paste0("Running CARNIVAL script with a setup: source path: ", source_fo
                " Start id: ", start_id, ";",
                " End id: ", end_id), 
          logger = "CARNIVAL_run.module" )
+
 
 source( file.path(source_folder, "utils_cropseq.R") )
 

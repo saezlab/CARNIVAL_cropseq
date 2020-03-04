@@ -53,7 +53,19 @@ option_list = list(
   
   make_option( c("-s", "--server"), type = "logical", default = FALSE, action = "store_true",
                 help = "Add the option if running on the server",
-                metavar = "logical" )
+                metavar = "logical" ),
+  
+  make_option( c("-w", "--working-dir"), type = "character", 
+               help = "Specify the working directory for a run",
+               metavar = "character" ),
+  
+  make_option( c("-i", "--start-id"), type = "numeric",  
+               help = "Specify the starting ID to run on (optional), from 1 to 30. IDs are used for uniprot_ids dataframe from preprocessed Rdata file.",
+               metavar = "numeric" ),
+  
+  make_option( c("-e", "--end-id"), type = "numeric",  
+               help = "Specify the starting ID to run on (optional), from 1 to 30. IDs are used for uniprot_ids dataframe from preprocessed Rdata file.",
+               metavar = "numeric" )
 )
 
 opt_parser = OptionParser(option_list = option_list);
@@ -66,6 +78,10 @@ server_run = unlist( opt["server"] )
 test_run = unlist( opt["test"] )
 local_run = unlist( opt["local"] )
 settings_file = unlist( opt["settings-file"])
+
+start_id = unlist( opt['start-id'] )
+end_id = unlist( opt['end-id'] )
+working_dir = unlist( opt['working-dir'] )
 
 if ( !( server_run || test_run || local_run ) )   {
   print_help( opt_parser )
@@ -92,8 +108,8 @@ if ( test_run ) {
   settings_run = settings$server
 }
 
-settings_run = settings_run[ settings_run != "" ]
-print( cat("Specified options for a run:", paste0(settings_run, collapse = " \n "))  )
+
+cat("Specified options for a run:", " \n ", paste0(settings_run, collapse = " \n "), " \n ")
 source_folder = settings_run$source_folder
 
 if ( source_folder == "" && "here" %in% (.packages()) ) {
