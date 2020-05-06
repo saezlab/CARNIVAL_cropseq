@@ -1,7 +1,7 @@
 This code is a first try out to run CARNIVAL on CRISPR-CAS9 perturbation data: [Crop-Seq](http://www.medical-epigenomics.org/papers/datlinger2017/).
 
 ## How to use: 
-Change settings and all of the paths in <b>settings.yml</b> <br/> in the corresponding profile (e.g. local) 
+Change settings and all of the paths in <b>settings.yml</b> <br/> in the corresponding profile in the file (e.g. local) 
 Then run in console:
 
 ### Local run
