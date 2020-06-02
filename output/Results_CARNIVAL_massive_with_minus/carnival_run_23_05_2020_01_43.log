@@ -1,0 +1,9 @@
+2020-05-23 01:43:54 INFO:CARNIVAL_run.module:CARNIVAL script started
+2020-05-23 01:43:54 INFO:CARNIVAL_run.module:Running CARNIVAL script with a setup: source path: /net/data.isilon/ag-saez/bq_oivanova/carnival_cropseq_runs/code; Is it a test run: FALSE; N threads:20; Start id: 22; End id: 24
+2020-05-23 01:43:55 INFO:CARNIVAL_run.module:Loading preprocessed Rdata file
+2020-05-23 01:44:06 INFO:CARNIVAL_run.module:Reading/requesting prior knowledge network
+2020-05-23 01:44:07 INFO:CARNIVAL_run.module:Prior knowledge network contains 21204 interactions
+2020-05-23 01:44:07 INFO:CARNIVAL_run.module:Running CARNIVAL for (TCR) data, gene:  RUNX1
+2020-05-23 04:31:41 INFO:CARNIVAL_run.module:Running CARNIVAL for (TCR) data, gene:  EGR1
+2020-05-23 07:19:13 INFO:CARNIVAL_run.module:Running CARNIVAL for (TCR) data, gene:  NFATC3
+2020-05-23 10:06:33 INFO:CARNIVAL_run.module:ALL CARNIVAL RUNS DONE

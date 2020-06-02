@@ -33,6 +33,7 @@ input_folder = file.path( base_path, settings_run$input_folder )
 raw_file = file.path( input_folder, settings_run$raw_file )
 annotation_file = file.path( input_folder, settings_run$annotation_file )
 
+dorothea_path = settings_run$dorothea_path
 dorothea_mapping_file = file.path( input_folder, settings_run$dorothea_mapping_file )
 PKN_file = file.path( input_folder, settings_run$PKN_file )
 
@@ -46,6 +47,7 @@ carnival_run = settings_run$carnival_run
 
 CARNIVAL_installation_path =  settings_run$CARNIVAL_installation_path
 carnival_threads = settings_run$carnival_threads
+carnival_timelimit = settings_run$carnival_timelimit
 solver_path = settings_run$solver_path
 Rdata_file = file.path ( output_folder, settings_run$Rdata_file )
 
@@ -64,7 +66,7 @@ run_stimulated = settings_run$run_stimulated
 ########################################################################################
 ### ------------ FURTHER SETTING UP THE PARAMETERS --------------------------------- ###
 ########################################################################################
-logfile = file.path( output_folder, paste0( "carnival_run_", format(Sys.time(), "%d_%m_%Y_%H_%M"), ".log" ) )
+logfile = file.path( output_folder, paste0( "carnival_run_", format(Sys.time(), "%d_%m_%Y_%T"), ".log" ) )
 
 if ( start_id == -1  ) {
   start_id = 1

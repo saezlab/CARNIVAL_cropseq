@@ -60,26 +60,27 @@ if ( !exists("settings_run") ) {
   } else {
     stop("Can't continue, please specify correct path to settings file")
   }
-}
-
-if ( dir.exists(source_folder) ) {
-  source( file.path(source_folder, "setting_up_pipeline.R") )
-  source( file.path(source_folder, "packages_utils.R") )  
-} else {
-  stop("processing_cropseq.R: can't continue, please specify correct source folder")
-}
-
-if ( !preprocessing ) {
-  preprocessing = TRUE  
+  
+  if ( dir.exists(source_folder) ) {
+    source( file.path(source_folder, "setting_up_pipeline.R") )
+  } else {
+    stop("processing_cropseq.R: can't continue, please specify correct source folder")
+  }
 }
 
 ########################################################################################
 ### ------------ INSTALLING/LOADING NECESSARY PACKAGES ----------------------------- ###
 ########################################################################################
 
+if ( dir.exists(source_folder) ) {
+  source( file.path(source_folder, "packages_utils.R") )  
+} else {
+  stop("run_carnival_cropseq.R: can't continue, please specify correct source folder")
+}
+  
 cran_list_packages = c("dplyr","readr", "stringr", "purrr", "tibble", "tidyr",
                        "Seurat", "logging", "BiocManager", "devtools")
-bioc_list_packages = c("viper", "biomaRt", "UniProt.ws", "rhdf5")
+bioc_list_packages = c("viper", "biomaRt", "UniProt.ws", "rhdf5", "hdf5r")
 
 CheckAndLoadLibraries( cran_list_packages, bioc_list_packages )
 
@@ -93,12 +94,12 @@ source( file.path(source_folder, "utils_cropseq.R") )
 ########################################################################################
 ### ------------ READING THE DATA -------------------------------------------------- ###
 ########################################################################################
-loginfo( paste( "Reading the data files:", annotated_filename, 
-                ";", raw_crispr_hdf5 ), 
+loginfo( paste( "Reading the data files:", annotation_file, 
+                ";", raw_file ), 
          logger = "preprocessing_run.module" )
 
-tcr_cell_annotation = read.delim( annotated_filename )
-trc_crispr_data     = Read10X_h5( raw_crispr_hdf5 )
+tcr_cell_annotation = read.delim( annotation_file )
+trc_crispr_data     = Read10X_h5( raw_file )
 
 loginfo( "Running standard seurat pipeline", logger = "preprocessing_run.module" ) 
 
@@ -124,7 +125,7 @@ tcr_cropseq_seurat_annotated = subset(tcr_cropseq_seurat_subset,
 #########################################################################################
 ### ------------ COLLECTING PERTURBED BY CRISPR-CAS9 GENE NAMES --------------------= ###
 #########################################################################################
-loginfo( "Collecing gene names perturbed by CRISPR-CAS9", logger = "preprocessing_run.module" )
+loginfo( "Collecting gene names perturbed by CRISPR-CAS9", logger = "preprocessing_run.module" )
 
 # Cleans the gene names from library identifiers in CRISPR-CAS9 experiment
 CleanGeneNames = function( genes, pattern_lib_identifier, pattern_to_clean ) {

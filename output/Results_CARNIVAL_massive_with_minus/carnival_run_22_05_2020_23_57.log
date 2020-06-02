@@ -1,0 +1,36 @@
+2020-05-22 23:57:50 INFO:CARNIVAL_run.module:CARNIVAL script started
+2020-05-22 23:57:50 INFO:CARNIVAL_run.module:Running CARNIVAL script with a setup: source path: /net/data.isilon/ag-saez/bq_oivanova/carnival_cropseq_runs/code; Is it a test run: FALSE; N threads:20; Start id: 19; End id: 21
+2020-05-22 23:57:50 INFO:CARNIVAL_run.module:Running CARNIVAL script with a setup: source path: /net/data.isilon/ag-saez/bq_oivanova/carnival_cropseq_runs/code; Is it a test run: FALSE; N threads:20; Start id: 19; End id: 21
+2020-05-22 23:57:50 INFO:CARNIVAL_run.module:Running CARNIVAL script with a setup: source path: /net/data.isilon/ag-saez/bq_oivanova/carnival_cropseq_runs/code; Is it a test run: FALSE; N threads:20; Start id: 16; End id: 18
+2020-05-22 23:57:51 INFO:CARNIVAL_run.module:Loading preprocessed Rdata file
+2020-05-22 23:57:51 INFO:CARNIVAL_run.module:Loading preprocessed Rdata file
+2020-05-22 23:57:51 INFO:CARNIVAL_run.module:Loading preprocessed Rdata file
+2020-05-22 23:57:51 INFO:CARNIVAL_run.module:Loading preprocessed Rdata file
+2020-05-22 23:58:02 INFO:CARNIVAL_run.module:Reading/requesting prior knowledge network
+2020-05-22 23:58:02 INFO:CARNIVAL_run.module:Reading/requesting prior knowledge network
+2020-05-22 23:58:02 INFO:CARNIVAL_run.module:Reading/requesting prior knowledge network
+2020-05-22 23:58:03 INFO:CARNIVAL_run.module:Prior knowledge network contains 21204 interactions
+2020-05-22 23:58:03 INFO:CARNIVAL_run.module:Running CARNIVAL for (TCR) data, gene:  JUN
+2020-05-22 23:58:03 INFO:CARNIVAL_run.module:Reading/requesting prior knowledge network
+2020-05-22 23:58:03 INFO:CARNIVAL_run.module:Prior knowledge network contains 21204 interactions
+2020-05-22 23:58:03 INFO:CARNIVAL_run.module:Running CARNIVAL for (TCR) data, gene:  JUN
+2020-05-22 23:58:03 INFO:CARNIVAL_run.module:Prior knowledge network contains 21204 interactions
+2020-05-22 23:58:03 INFO:CARNIVAL_run.module:Running CARNIVAL for (TCR) data, gene:  RUNX1
+2020-05-22 23:58:04 INFO:CARNIVAL_run.module:Prior knowledge network contains 21204 interactions
+2020-05-22 23:58:04 INFO:CARNIVAL_run.module:Running CARNIVAL for (TCR) data, gene:  RUNX2
+2020-05-23 02:45:39 INFO:CARNIVAL_run.module:Running CARNIVAL for (TCR) data, gene:  EGR1
+2020-05-23 02:45:39 INFO:CARNIVAL_run.module:Running CARNIVAL for (TCR) data, gene:  EGR4
+2020-05-23 02:45:39 INFO:CARNIVAL_run.module:Cannot process data for EGR4 : Error in checkInputObj(inputObj = inputObj, netObj = netObj): Something wrong with your measurements object/network object. 
+           No input is present in the network
+2020-05-23 02:45:39 INFO:CARNIVAL_run.module:Running CARNIVAL for (TCR) data, gene:  NFATC1
+2020-05-23 02:45:47 INFO:CARNIVAL_run.module:Running CARNIVAL for (TCR) data, gene:  EGR4
+2020-05-23 02:45:47 INFO:CARNIVAL_run.module:Cannot process data for EGR4 : Error in checkInputObj(inputObj = inputObj, netObj = netObj): Something wrong with your measurements object/network object. 
+           No input is present in the network
+2020-05-23 02:45:47 INFO:CARNIVAL_run.module:Running CARNIVAL for (TCR) data, gene:  NFATC1
+2020-05-23 02:45:53 INFO:CARNIVAL_run.module:Running CARNIVAL for (TCR) data, gene:  ETS1
+2020-05-23 05:33:11 INFO:CARNIVAL_run.module:ALL CARNIVAL RUNS DONE
+2020-05-23 05:33:15 INFO:CARNIVAL_run.module:Running CARNIVAL for (TCR) data, gene:  NFATC3
+2020-05-23 05:33:42 INFO:CARNIVAL_run.module:Running CARNIVAL for (TCR) data, gene:  JUNB
+2020-05-23 05:33:51 INFO:CARNIVAL_run.module:ALL CARNIVAL RUNS DONE
+2020-05-23 08:20:55 INFO:CARNIVAL_run.module:ALL CARNIVAL RUNS DONE
+2020-05-23 08:21:12 INFO:CARNIVAL_run.module:ALL CARNIVAL RUNS DONE

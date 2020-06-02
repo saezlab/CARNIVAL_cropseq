@@ -64,7 +64,6 @@ if ( !exists("settings_run") ) {
   
   if ( dir.exists(source_folder) ) {
     source( file.path(source_folder, "setting_up_pipeline.R") )
-    source( file.path(source_folder, "packages_utils.R") )  
   } else {
     stop("run_carnival_cropseq.R: can't continue, please specify correct source folder")
   }
@@ -120,7 +119,8 @@ if ( file.exists(Rdata_file) ) {
 RunCarnivalOneTime = function( edited_gene_name, prior_knowledge_network, viper_scores, 
                                perturbations, output_filename = "out_carnival.csv",
                                output_dir = "", produce_dot_figure = FALSE, 
-                               threads = 0, save_outfile = TRUE) { 
+                               threads = 0, save_outfile = TRUE,
+                               save_image = TRUE) { 
   
   res_carnival = runCARNIVAL(solverPath = solver_path, 
                              netObj = prior_knowledge_network, 
@@ -129,15 +129,25 @@ RunCarnivalOneTime = function( edited_gene_name, prior_knowledge_network, viper_
                              solver = "cplex", 
                              dir_name = output_dir,
                              DOTfig = produce_dot_figure,
-                             timelimit = 10000,
+                             timelimit = carnival_timelimit,
                              threads = threads)
   if ( save_outfile ) { 
-    results_carnival = res_carnival$weightedSIF %>% as_tibble() %>% 
-                                                dplyr::select("Node1", "Node2", "Sign")
+    results_carnival = res_carnival$weightedSIF %>% as_tibble() 
+    results_carnival_nodes_attributes = results_nodes_attributes$nodesAttributes %>% as_tibble()
+    
     write.csv( results_carnival, file = file.path( output_dir, output_filename ), 
                quote = FALSE, row.names = FALSE ) 
+    
+    attribute_file_name = paste0( strsplit(output_filename, "\\.")[[1]][0], "nodes_attributes" ) #get the filename without extension
+    attribute_file_extension = strsplit(output_filename, "\\.")[[1]][1]
+    write.csv( results_carnival_nodes_attributes, file = file.path( output_dir, attribute_file_name, attribute_file_extension), 
+               quote = FALSE, row.names = FALSE ) 
   } 
-  
+
+  if ( save_image ) {
+    save.image( file = paste0( strsplit(output_filename, "\\.")[[1]][0], ".RData") ) 
+  }
+
   return( res_carnival )
 }
 
@@ -156,7 +166,7 @@ RunCarnivalOnListGenes = function( uniprot_ids, tcr_genes_viper, prior_knowledge
              logger = "CARNIVAL_run.module" )
     tryCatch({
       uniprot_id = uniprot_ids %>% dplyr::filter( GENES == i ) 
-      perturbations = data.frame( "1" )
+      perturbations = data.frame( "-1" )
       names(perturbations) = uniprot_id$UNIPROTKB
     
       viper_scores = tcr_genes_viper %>% as_tibble( rownames = "id" ) %>% 

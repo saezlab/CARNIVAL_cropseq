@@ -95,6 +95,7 @@ LoadPKNForCarnival = function( path_file = "", filter_by_references = 0 ) {
 # Translates gene names to uniprot IDs. It will select only curated IDs (that have a corresponding Swissprot id). 
 # If multiple IDs are available, it will return the one with the highest annotation score.
 # Because each request to the database takes a long time, it is better to request all gene_names at the same time
+# TODO for now the only_first param is not working 
 TranslateIds = function( gene_names, only_first = FALSE){
 
   ensembl = useMart( 'ensembl', dataset = "hsapiens_gene_ensembl" )
@@ -109,11 +110,11 @@ TranslateIds = function( gene_names, only_first = FALSE){
                              filters = "uniprot_gn_symbol",
                              mart = ensembl)
 
-  # select only curated ids
+  # Selects only curated ids
   requested_mart = requested_mart %>% filter(uniprotswissprot != '')
 
-  # collect annotation scores from uniprot database
-  # more information on annotation:
+  # Collects annotation scores from uniprot database
+  # More information on annotation:
   # https://www.ebi.ac.uk/training/online/course/uniprot-exploring-protein-sequence-and-functional/exploring-uniprotkb-entry/annotation-score
   ids = select(up, columns = c("UNIPROTKB", "GENES", "SCORE"), keys = requested_mart$uniprot_gn_id)
   ids = ids %>% mutate( SCORE_upd = str_remove(SCORE, " out of \\d") ) %>%

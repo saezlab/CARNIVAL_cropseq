@@ -1,0 +1,20 @@
+2020-05-23 05:33:27 INFO:CARNIVAL_run.module:CARNIVAL script started
+2020-05-23 05:33:27 INFO:CARNIVAL_run.module:Running CARNIVAL script with a setup: source path: /net/data.isilon/ag-saez/bq_oivanova/carnival_cropseq_runs/code; Is it a test run: FALSE; N threads:20; Start id: 28; End id: 30
+2020-05-23 05:33:27 INFO:CARNIVAL_run.module:Loading preprocessed Rdata file
+2020-05-23 05:33:37 INFO:CARNIVAL_run.module:Reading/requesting prior knowledge network
+2020-05-23 05:33:38 INFO:CARNIVAL_run.module:Prior knowledge network contains 21204 interactions
+2020-05-23 05:33:38 INFO:CARNIVAL_run.module:Running CARNIVAL for (TCR) data, gene:  LAT
+2020-05-23 05:34:04 INFO:CARNIVAL_run.module:CARNIVAL script started
+2020-05-23 05:34:04 INFO:CARNIVAL_run.module:Running CARNIVAL script with a setup: source path: /net/data.isilon/ag-saez/bq_oivanova/carnival_cropseq_runs/code; Is it a test run: FALSE; N threads:20; Start id: 28; End id: 30
+2020-05-23 05:34:04 INFO:CARNIVAL_run.module:Loading preprocessed Rdata file
+2020-05-23 05:34:14 INFO:CARNIVAL_run.module:Reading/requesting prior knowledge network
+2020-05-23 05:34:15 INFO:CARNIVAL_run.module:Prior knowledge network contains 21204 interactions
+2020-05-23 05:34:15 INFO:CARNIVAL_run.module:Running CARNIVAL for (TCR) data, gene:  LAT
+2020-05-23 08:22:00 INFO:CARNIVAL_run.module:Running CARNIVAL for (TCR) data, gene:  EGR3
+2020-05-23 08:22:11 INFO:CARNIVAL_run.module:Running CARNIVAL for (TCR) data, gene:  EGR3
+2020-05-23 11:09:27 INFO:CARNIVAL_run.module:Running CARNIVAL for (TCR) data, gene:  NFAT5
+2020-05-23 11:10:27 INFO:CARNIVAL_run.module:Running CARNIVAL for (TCR) data, gene:  NFAT5
+2020-05-23 13:56:46 INFO:CARNIVAL_run.module:Cannot process data for NFAT5 : Error in resList[[1]]: subscript out of bounds
+2020-05-23 13:56:46 INFO:CARNIVAL_run.module:ALL CARNIVAL RUNS DONE
+2020-05-23 13:57:44 INFO:CARNIVAL_run.module:Cannot process data for NFAT5 : Error in resList[[1]]: subscript out of bounds
+2020-05-23 13:57:44 INFO:CARNIVAL_run.module:ALL CARNIVAL RUNS DONE

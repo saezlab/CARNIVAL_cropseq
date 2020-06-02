@@ -1,0 +1,21 @@
+2020-05-23 01:36:49 INFO:CARNIVAL_run.module:CARNIVAL script started
+2020-05-23 01:36:49 INFO:CARNIVAL_run.module:Running CARNIVAL script with a setup: source path: /net/data.isilon/ag-saez/bq_oivanova/carnival_cropseq_runs/code; Is it a test run: FALSE; N threads:20; Start id: 19; End id: 21
+2020-05-23 01:36:51 INFO:CARNIVAL_run.module:Loading preprocessed Rdata file
+2020-05-23 01:37:02 INFO:CARNIVAL_run.module:Reading/requesting prior knowledge network
+2020-05-23 01:37:03 INFO:CARNIVAL_run.module:Prior knowledge network contains 21204 interactions
+2020-05-23 01:37:03 INFO:CARNIVAL_run.module:Running CARNIVAL for (TCR) data, gene:  JUN
+2020-05-23 01:37:08 INFO:CARNIVAL_run.module:CARNIVAL script started
+2020-05-23 01:37:08 INFO:CARNIVAL_run.module:Running CARNIVAL script with a setup: source path: /net/data.isilon/ag-saez/bq_oivanova/carnival_cropseq_runs/code; Is it a test run: FALSE; N threads:20; Start id: 22; End id: 24
+2020-05-23 01:37:09 INFO:CARNIVAL_run.module:Loading preprocessed Rdata file
+2020-05-23 01:37:21 INFO:CARNIVAL_run.module:Reading/requesting prior knowledge network
+2020-05-23 01:37:23 INFO:CARNIVAL_run.module:Prior knowledge network contains 21204 interactions
+2020-05-23 01:37:23 INFO:CARNIVAL_run.module:Running CARNIVAL for (TCR) data, gene:  RUNX1
+2020-05-23 04:25:02 INFO:CARNIVAL_run.module:Running CARNIVAL for (TCR) data, gene:  EGR4
+2020-05-23 04:25:02 INFO:CARNIVAL_run.module:Cannot process data for EGR4 : Error in checkInputObj(inputObj = inputObj, netObj = netObj): Something wrong with your measurements object/network object. 
+           No input is present in the network
+2020-05-23 04:25:02 INFO:CARNIVAL_run.module:Running CARNIVAL for (TCR) data, gene:  NFATC1
+2020-05-23 04:25:12 INFO:CARNIVAL_run.module:Running CARNIVAL for (TCR) data, gene:  EGR1
+2020-05-23 07:12:42 INFO:CARNIVAL_run.module:ALL CARNIVAL RUNS DONE
+2020-05-23 07:13:10 INFO:CARNIVAL_run.module:Cannot process data for EGR1 : Error in if (abs(as.numeric(act[which(measName[counter] == act[, 1]), : missing value where TRUE/FALSE needed
+2020-05-23 07:13:10 INFO:CARNIVAL_run.module:Running CARNIVAL for (TCR) data, gene:  NFATC3
+2020-05-23 10:01:44 INFO:CARNIVAL_run.module:ALL CARNIVAL RUNS DONE

@@ -1,0 +1,504 @@
+digraph {
+
+O75460->P17861 [penwidth=1, color=black, arrowhead="vee"]
+P50750->Q15596 [penwidth=1, color=black, arrowhead="vee"]
+P50750->P06400 [penwidth=1, color=black, arrowhead="vee"]
+P36873->P50750 [penwidth=1, color=black, arrowhead="vee"]
+P24941->Q08050 [penwidth=1, color=black, arrowhead="vee"]
+Q9Y4K3->P49116 [penwidth=1, color=black, arrowhead="vee"]
+P63165->Q9Y4K3 [penwidth=1, color=black, arrowhead="vee"]
+Q9Y4K3->Q9NYJ8 [penwidth=1, color=black, arrowhead="vee"]
+O15111->Q12778 [penwidth=1, color=black, arrowhead="tee"]
+O15111->Q01201 [penwidth=1, color=black, arrowhead="tee"]
+O15111->Q9Y261 [penwidth=1, color=black, arrowhead="tee"]
+Q15349->P18848 [penwidth=1, color=black, arrowhead="vee"]
+P28482->Q15349 [penwidth=1, color=black, arrowhead="vee"]
+P27361->P29350 [penwidth=1, color=black, arrowhead="tee"]
+P27361->Q12778 [penwidth=1, color=black, arrowhead="tee"]
+P27361->P10242 [penwidth=1, color=black, arrowhead="tee"]
+P27361->P49841 [penwidth=1, color=black, arrowhead="tee"]
+P27361->P41182 [penwidth=1, color=black, arrowhead="tee"]
+P27361->Q01860 [penwidth=1, color=black, arrowhead="tee"]
+P35222->Q12778 [penwidth=1, color=black, arrowhead="vee"]
+P45983->P35222 [penwidth=1, color=black, arrowhead="tee"]
+P68400->P35222 [penwidth=1, color=black, arrowhead="vee"]
+P46531->P35222 [penwidth=1, color=black, arrowhead="tee"]
+P35222->P36402 [penwidth=1, color=black, arrowhead="vee"]
+P11473->P35222 [penwidth=1, color=black, arrowhead="vee"]
+P35222->P15884 [penwidth=1, color=black, arrowhead="vee"]
+Q99626->P35222 [penwidth=1, color=black, arrowhead="tee"]
+P40763->Q16665 [penwidth=1, color=black, arrowhead="tee"]
+P63165->Q13363 [penwidth=1, color=black, arrowhead="vee"]
+P45983->Q13363 [penwidth=1, color=black, arrowhead="tee"]
+Q13363->O60315 [penwidth=1, color=black, arrowhead="vee"]
+Q9NYJ8->P49116 [penwidth=1, color=black, arrowhead="vee"]
+Q14164->Q12778 [penwidth=1, color=black, arrowhead="tee"]
+P20749->P19838 [penwidth=1, color=black, arrowhead="vee"]
+Q01094->P19838 [penwidth=1, color=black, arrowhead="tee"]
+P19838->Q04206 [penwidth=1, color=black, arrowhead="vee"]
+P09874->P19838 [penwidth=1, color=black, arrowhead="vee"]
+P63165->P49711 [penwidth=1, color=black, arrowhead="vee"]
+P11021->O75460 [penwidth=1, color=black, arrowhead="tee"]
+Q92831->P24941 [penwidth=1, color=black, arrowhead="tee"]
+P49674->Q12778 [penwidth=1, color=black, arrowhead="vee"]
+Q92997->P49674 [penwidth=1, color=black, arrowhead="vee"]
+P49674->O15055 [penwidth=1, color=black, arrowhead="vee"]
+Q05655->P29350 [penwidth=1, color=black, arrowhead="vee"]
+P24941->Q99708 [penwidth=1, color=black, arrowhead="vee"]
+P28482->P24941 [penwidth=1, color=black, arrowhead="vee"]
+P24941->Q01167 [penwidth=1, color=black, arrowhead="vee"]
+P67775->Q04206 [penwidth=1, color=black, arrowhead="tee"]
+P67775->Q05655 [penwidth=1, color=black, arrowhead="tee"]
+P67775->P28482 [penwidth=1, color=black, arrowhead="tee"]
+P67775->P32519 [penwidth=1, color=black, arrowhead="tee"]
+Q12778->O43474 [penwidth=1, color=black, arrowhead="vee"]
+P68400->O15379 [penwidth=1, color=black, arrowhead="vee"]
+P20749->O15379 [penwidth=1, color=black, arrowhead="vee"]
+Q7KZI7->Q92997 [penwidth=1, color=black, arrowhead="vee"]
+O75925->P63165 [penwidth=1, color=black, arrowhead="vee"]
+P68400->O75925 [penwidth=1, color=black, arrowhead="vee"]
+O75925->O75626 [penwidth=1, color=black, arrowhead="vee"]
+P42224->Q04206 [penwidth=1, color=black, arrowhead="tee"]
+P42224->Q16665 [penwidth=1, color=black, arrowhead="tee"]
+Q00613->P63165 [penwidth=1, color=black, arrowhead="tee"]
+O75081->P17542 [penwidth=1, color=black, arrowhead="tee"]
+Q15788->P42229 [penwidth=1, color=black, arrowhead="vee"]
+Q15788->P11473 [penwidth=1, color=black, arrowhead="vee"]
+P28482->Q15788 [penwidth=1, color=black, arrowhead="vee"]
+P68400->Q8TAQ2 [penwidth=1, color=black, arrowhead="vee"]
+P68400->Q04206 [penwidth=1, color=black, arrowhead="vee"]
+P68400->P11473 [penwidth=1, color=black, arrowhead="vee"]
+P28482->P68400 [penwidth=1, color=black, arrowhead="vee"]
+P68400->P17480 [penwidth=1, color=black, arrowhead="vee"]
+P68400->P05549 [penwidth=1, color=black, arrowhead="vee"]
+P49841->P20749 [penwidth=1, color=black, arrowhead="vee"]
+Q9NYJ8->Q15759 [penwidth=1, color=black, arrowhead="vee"]
+Q15759->O60381 [penwidth=1, color=black, arrowhead="vee"]
+P49841->Q7KZI7 [penwidth=1, color=black, arrowhead="vee"]
+P23443->P49841 [penwidth=1, color=black, arrowhead="tee"]
+P06400->Q16665 [penwidth=1, color=black, arrowhead="vee"]
+Q15303->P42229 [penwidth=1, color=black, arrowhead="vee"]
+P28482->P42229 [penwidth=1, color=black, arrowhead="vee"]
+Q15672->Q04206 [penwidth=1, color=black, arrowhead="tee"]
+Q05655->Q04206 [penwidth=1, color=black, arrowhead="vee"]
+P49841->Q04206 [penwidth=1, color=black, arrowhead="vee"]
+P28482->Q04206 [penwidth=1, color=black, arrowhead="vee"]
+P09874->Q16665 [penwidth=1, color=black, arrowhead="vee"]
+P28482->Q16665 [penwidth=1, color=black, arrowhead="vee"]
+P84022->P55317 [penwidth=1, color=black, arrowhead="tee"]
+P28482->P09874 [penwidth=1, color=black, arrowhead="vee"]
+Q9NSA1->Q15303 [penwidth=1, color=black, arrowhead="vee"]
+O60716->Q86T24 [penwidth=1, color=black, arrowhead="tee"]
+P49841->P33076 [penwidth=1, color=black, arrowhead="vee"]
+P28482->P23769 [penwidth=1, color=black, arrowhead="vee"]
+P28482->Q02080 [penwidth=1, color=black, arrowhead="vee"]
+P28482->Q8NHW3 [penwidth=1, color=black, arrowhead="vee"]
+P28482->Q96SB3 [penwidth=1, color=black, arrowhead="vee"]
+P28482->P56693 [penwidth=1, color=black, arrowhead="vee"]
+Q96SB3->P36873 [penwidth=1, color=black, arrowhead="vee"]
+P33076->P48382 [penwidth=1, color=black, arrowhead="vee"]
+P33076->O14593 [penwidth=1, color=black, arrowhead="vee"]
+P35222->Q9Y261 [penwidth=1, color=black, arrowhead="vee"]
+Q15672->P10242 [penwidth=1, color=black, arrowhead="tee"]
+O43623->P11473 [penwidth=1, color=black, arrowhead="tee"]
+P18848->Q9NSA1 [penwidth=1, color=black, arrowhead="vee"]
+P25116->P15407 [penwidth=1, color=black, arrowhead="vee"]
+P25116->Q99612 [penwidth=1, color=black, arrowhead="vee"]
+Q9Y6K1->O00470 [penwidth=1, color=black, arrowhead="tee"]
+Q15672->P25116 [penwidth=1, color=black, arrowhead="tee"]
+Q8NHW3->P52945 [penwidth=1, color=black, arrowhead="vee"]
+O15111->Q00653 [penwidth=1, color=red, arrowhead="vee"]
+O15111->Q9Y6Q9 [penwidth=1, color=red, arrowhead="vee"]
+O15111->P01106 [penwidth=1, color=red, arrowhead="vee"]
+P46531->O15111 [penwidth=1, color=red, arrowhead="vee"]
+P46937->O15350 [penwidth=1, color=red, arrowhead="vee"]
+Q92831->O15350 [penwidth=1, color=red, arrowhead="vee"]
+P24941->O15350 [penwidth=1, color=red, arrowhead="tee"]
+Q01094->O15350 [penwidth=1, color=red, arrowhead="vee"]
+Q15349->O75030 [penwidth=1, color=red, arrowhead="tee"]
+O15055->P14859 [penwidth=1, color=red, arrowhead="tee"]
+P27361->P40763 [penwidth=1, color=red, arrowhead="vee"]
+P27361->Q00613 [penwidth=1, color=red, arrowhead="vee"]
+P27361->P05412 [penwidth=1, color=red, arrowhead="vee"]
+P27361->P01106 [penwidth=1, color=red, arrowhead="vee"]
+P27361->P45983 [penwidth=1, color=red, arrowhead="vee"]
+P27361->Q01094 [penwidth=1, color=red, arrowhead="vee"]
+P27361->P23443 [penwidth=1, color=red, arrowhead="vee"]
+P27361->Q06546 [penwidth=1, color=red, arrowhead="vee"]
+P27361->Q15672 [penwidth=1, color=red, arrowhead="vee"]
+P27361->Q12772 [penwidth=1, color=red, arrowhead="vee"]
+Q05655->P27361 [penwidth=1, color=red, arrowhead="tee"]
+P27361->P17535 [penwidth=1, color=red, arrowhead="vee"]
+P27361->Q01196 [penwidth=1, color=red, arrowhead="vee"]
+P27361->Q02447 [penwidth=1, color=red, arrowhead="vee"]
+P27361->P01100 [penwidth=1, color=red, arrowhead="vee"]
+P27361->P28324 [penwidth=1, color=red, arrowhead="vee"]
+P27361->P56270 [penwidth=1, color=red, arrowhead="vee"]
+P10070->P08151 [penwidth=1, color=red, arrowhead="vee"]
+P23443->P08151 [penwidth=1, color=red, arrowhead="vee"]
+P01106->Q9Y6K1 [penwidth=1, color=red, arrowhead="vee"]
+P29350->P51692 [penwidth=1, color=red, arrowhead="tee"]
+O60674->P51692 [penwidth=1, color=red, arrowhead="vee"]
+P35222->P48431 [penwidth=1, color=red, arrowhead="tee"]
+Q00653->Q13114 [penwidth=1, color=red, arrowhead="vee"]
+P08887->P40763 [penwidth=1, color=red, arrowhead="vee"]
+P29350->P40763 [penwidth=1, color=red, arrowhead="tee"]
+P40763->P18146 [penwidth=1, color=red, arrowhead="vee"]
+P40763->P42224 [penwidth=1, color=red, arrowhead="vee"]
+P45983->P40763 [penwidth=1, color=red, arrowhead="vee"]
+P40763->P17275 [penwidth=1, color=red, arrowhead="vee"]
+P84022->P40763 [penwidth=1, color=red, arrowhead="vee"]
+P40763->Q15672 [penwidth=1, color=red, arrowhead="vee"]
+P40763->P17947 [penwidth=1, color=red, arrowhead="vee"]
+P05231->P40763 [penwidth=1, color=red, arrowhead="vee"]
+O60674->P40763 [penwidth=1, color=red, arrowhead="vee"]
+Q15797->Q13485 [penwidth=1, color=red, arrowhead="vee"]
+P46937->Q15797 [penwidth=1, color=red, arrowhead="vee"]
+P46531->Q15797 [penwidth=1, color=red, arrowhead="vee"]
+P28482->Q15797 [penwidth=1, color=red, arrowhead="tee"]
+Q13363->Q9NQB0 [penwidth=1, color=red, arrowhead="tee"]
+P05412->Q13485 [penwidth=1, color=red, arrowhead="vee"]
+Q13485->Q02078 [penwidth=1, color=red, arrowhead="vee"]
+P84022->Q13485 [penwidth=1, color=red, arrowhead="vee"]
+Q13485->P01100 [penwidth=1, color=red, arrowhead="vee"]
+Q13485->Q15329 [penwidth=1, color=red, arrowhead="vee"]
+P49674->P46937 [penwidth=1, color=red, arrowhead="tee"]
+P46937->Q15562 [penwidth=1, color=red, arrowhead="vee"]
+P46937->P28347 [penwidth=1, color=red, arrowhead="vee"]
+Q14164->Q14653 [penwidth=1, color=red, arrowhead="vee"]
+Q14164->P42224 [penwidth=1, color=red, arrowhead="vee"]
+Q14164->Q04864 [penwidth=1, color=red, arrowhead="vee"]
+Q13114->Q14164 [penwidth=1, color=red, arrowhead="vee"]
+Q9Y261->P32243 [penwidth=1, color=red, arrowhead="tee"]
+Q92831->P15172 [penwidth=1, color=red, arrowhead="vee"]
+Q92831->Q06330 [penwidth=1, color=red, arrowhead="vee"]
+Q92831->P10914 [penwidth=1, color=red, arrowhead="vee"]
+Q92831->P46531 [penwidth=1, color=red, arrowhead="vee"]
+Q92831->P84022 [penwidth=1, color=red, arrowhead="vee"]
+P05114->Q92831 [penwidth=1, color=red, arrowhead="vee"]
+Q92831->P14316 [penwidth=1, color=red, arrowhead="vee"]
+Q92831->Q06413 [penwidth=1, color=red, arrowhead="vee"]
+Q92831->Q9Y2Y9 [penwidth=1, color=red, arrowhead="vee"]
+P25490->P01106 [penwidth=1, color=red, arrowhead="vee"]
+P06400->P25490 [penwidth=1, color=red, arrowhead="tee"]
+P52630->P42224 [penwidth=1, color=red, arrowhead="vee"]
+O60674->P52630 [penwidth=1, color=red, arrowhead="vee"]
+P49674->P10070 [penwidth=1, color=red, arrowhead="tee"]
+P49841->P10070 [penwidth=1, color=red, arrowhead="tee"]
+P49674->O60716 [penwidth=1, color=red, arrowhead="tee"]
+Q96T58->O75376 [penwidth=1, color=red, arrowhead="vee"]
+Q01094->Q14209 [penwidth=1, color=red, arrowhead="vee"]
+P06400->Q14209 [penwidth=1, color=red, arrowhead="tee"]
+P05231->P08887 [penwidth=1, color=red, arrowhead="vee"]
+P08887->O60674 [penwidth=1, color=red, arrowhead="vee"]
+P29350->Q12809 [penwidth=1, color=red, arrowhead="tee"]
+P05412->Q9NQB0 [penwidth=1, color=red, arrowhead="vee"]
+P84022->Q9NQB0 [penwidth=1, color=red, arrowhead="vee"]
+P24941->P15172 [penwidth=1, color=red, arrowhead="tee"]
+P24941->Q01094 [penwidth=1, color=red, arrowhead="tee"]
+P24941->Q13153 [penwidth=1, color=red, arrowhead="tee"]
+P24941->P84022 [penwidth=1, color=red, arrowhead="tee"]
+P24941->P98177 [penwidth=1, color=red, arrowhead="tee"]
+P67775->P01106 [penwidth=1, color=red, arrowhead="vee"]
+P67775->P98177 [penwidth=1, color=red, arrowhead="vee"]
+O60674->P67775 [penwidth=1, color=red, arrowhead="vee"]
+P06400->P20226 [penwidth=1, color=red, arrowhead="tee"]
+O60674->Q14765 [penwidth=1, color=red, arrowhead="vee"]
+P05412->P18146 [penwidth=1, color=red, arrowhead="vee"]
+O15379->P01106 [penwidth=1, color=red, arrowhead="tee"]
+O15379->O60675 [penwidth=1, color=red, arrowhead="tee"]
+O15379->Q16236 [penwidth=1, color=red, arrowhead="tee"]
+P45983->Q14653 [penwidth=1, color=red, arrowhead="vee"]
+O75925->P42224 [penwidth=1, color=red, arrowhead="tee"]
+P46531->P48431 [penwidth=1, color=red, arrowhead="vee"]
+P45983->P42224 [penwidth=1, color=red, arrowhead="vee"]
+P42224->P10914 [penwidth=1, color=red, arrowhead="vee"]
+P05231->P42224 [penwidth=1, color=red, arrowhead="vee"]
+O60674->P42224 [penwidth=1, color=red, arrowhead="vee"]
+P42224->P14316 [penwidth=1, color=red, arrowhead="vee"]
+P49841->Q00613 [penwidth=1, color=red, arrowhead="tee"]
+Q15303->O75081 [penwidth=1, color=red, arrowhead="tee"]
+P45983->P05412 [penwidth=1, color=red, arrowhead="vee"]
+P68400->P05412 [penwidth=1, color=red, arrowhead="tee"]
+P11473->P05412 [penwidth=1, color=red, arrowhead="tee"]
+P05412->P17947 [penwidth=1, color=red, arrowhead="vee"]
+P05412->P01100 [penwidth=1, color=red, arrowhead="vee"]
+P49841->P05412 [penwidth=1, color=red, arrowhead="tee"]
+P05412->P15408 [penwidth=1, color=red, arrowhead="vee"]
+P45983->P10276 [penwidth=1, color=red, arrowhead="vee"]
+P10276->P22736 [penwidth=1, color=red, arrowhead="vee"]
+Q02078->P15172 [penwidth=1, color=red, arrowhead="vee"]
+Q06413->P15172 [penwidth=1, color=red, arrowhead="vee"]
+P45983->P01106 [penwidth=1, color=red, arrowhead="vee"]
+P61244->P01106 [penwidth=1, color=red, arrowhead="vee"]
+P46531->P01106 [penwidth=1, color=red, arrowhead="vee"]
+P06400->P01106 [penwidth=1, color=red, arrowhead="tee"]
+Q04206->P01106 [penwidth=1, color=red, arrowhead="tee"]
+O60381->P01106 [penwidth=1, color=red, arrowhead="tee"]
+P49841->P01106 [penwidth=1, color=red, arrowhead="tee"]
+P46531->Q06330 [penwidth=1, color=red, arrowhead="vee"]
+Q06330->P23759 [penwidth=1, color=red, arrowhead="vee"]
+P45983->P84022 [penwidth=1, color=red, arrowhead="vee"]
+P45983->Q15672 [penwidth=1, color=red, arrowhead="vee"]
+P45983->P17535 [penwidth=1, color=red, arrowhead="vee"]
+P45983->P98177 [penwidth=1, color=red, arrowhead="vee"]
+P28482->P45983 [penwidth=1, color=red, arrowhead="tee"]
+P45983->P17544 [penwidth=1, color=red, arrowhead="vee"]
+P45983->P41235 [penwidth=1, color=red, arrowhead="vee"]
+P45983->P28324 [penwidth=1, color=red, arrowhead="vee"]
+P42226->P23771 [penwidth=1, color=red, arrowhead="vee"]
+P84022->P23771 [penwidth=1, color=red, arrowhead="vee"]
+P68400->P61244 [penwidth=1, color=red, arrowhead="tee"]
+P84022->P61244 [penwidth=1, color=red, arrowhead="vee"]
+P61244->P50539 [penwidth=1, color=red, arrowhead="vee"]
+O60674->P42226 [penwidth=1, color=red, arrowhead="vee"]
+Q05655->Q01543 [penwidth=1, color=red, arrowhead="tee"]
+Q99708->Q96T58 [penwidth=1, color=red, arrowhead="tee"]
+P68400->Q08945 [penwidth=1, color=red, arrowhead="tee"]
+P68400->Q16236 [penwidth=1, color=red, arrowhead="tee"]
+P68400->P05114 [penwidth=1, color=red, arrowhead="tee"]
+P68400->Q13133 [penwidth=1, color=red, arrowhead="tee"]
+P68400->Q13422 [penwidth=1, color=red, arrowhead="tee"]
+P68400->Q01892 [penwidth=1, color=red, arrowhead="tee"]
+Q15759->Q16236 [penwidth=1, color=red, arrowhead="tee"]
+P10914->Q9BX63 [penwidth=1, color=red, arrowhead="vee"]
+P06400->Q01094 [penwidth=1, color=red, arrowhead="tee"]
+P84022->P46531 [penwidth=1, color=red, arrowhead="vee"]
+P23443->Q03060 [penwidth=1, color=red, arrowhead="vee"]
+P06400->P17947 [penwidth=1, color=red, arrowhead="tee"]
+P06400->P21675 [penwidth=1, color=red, arrowhead="tee"]
+Q13153->P78545 [penwidth=1, color=red, arrowhead="vee"]
+P28482->P06401 [penwidth=1, color=red, arrowhead="tee"]
+Q9UBK2->P11474 [penwidth=1, color=red, arrowhead="vee"]
+P49841->Q16236 [penwidth=1, color=red, arrowhead="tee"]
+P84022->Q15329 [penwidth=1, color=red, arrowhead="vee"]
+P28482->P84022 [penwidth=1, color=red, arrowhead="tee"]
+Q03164->Q01196 [penwidth=1, color=red, arrowhead="vee"]
+P23759->Q03164 [penwidth=1, color=red, arrowhead="vee"]
+P09874->Q9UGL1 [penwidth=1, color=red, arrowhead="tee"]
+Q05655->P10588 [penwidth=1, color=red, arrowhead="tee"]
+P41182->P17535 [penwidth=1, color=red, arrowhead="tee"]
+P23769->P17947 [penwidth=1, color=red, arrowhead="tee"]
+P28324->P01100 [penwidth=1, color=red, arrowhead="vee"]
+P49841->Q13887 [penwidth=1, color=red, arrowhead="tee"]
+P49841->Q14494 [penwidth=1, color=red, arrowhead="tee"]
+P28482->P98177 [penwidth=1, color=red, arrowhead="tee"]
+P78545->Q9NZC4 [penwidth=1, color=red, arrowhead="vee"]
+P23771->P11308 [penwidth=1, color=red, arrowhead="vee"]
+P23759->P15172 [penwidth=1, color=red, arrowhead="vee"]
+P98177->P15172 [penwidth=1, color=red, arrowhead="vee"]
+P14859->Q15672 [penwidth=1, color=red, arrowhead="vee"]
+P14859->O43623 [penwidth=1, color=red, arrowhead="vee"]
+Q06413->P05412 [penwidth=1, color=red, arrowhead="vee"]
+P28347->P98177 [penwidth=1, color=red, arrowhead="vee"]
+Q15672->P01100 [penwidth=1, color=red, arrowhead="vee"]
+P08151->P04198 [penwidth=1, color=red, arrowhead="vee"]
+P42229->Q06413 [penwidth=1, color=red, arrowhead="tee"]
+Q01860->Q99626 [penwidth=1, color=red, arrowhead="tee"]
+Q01860->P26367 [penwidth=1, color=red, arrowhead="tee"]
+O75626->P01106 [penwidth=1, color=red, arrowhead="tee"]
+P11308->P01106 [penwidth=1, color=red, arrowhead="vee"]
+Q06330->Q00653 [penwidth=1, color=red, arrowhead="vee"]
+P17947->Q01543 [penwidth=1, color=red, arrowhead="vee"]
+Q01543->P11308 [penwidth=1, color=red, arrowhead="vee"]
+Q15672->P10589 [penwidth=1, color=red, arrowhead="vee"]
+O15054->Q15306 [penwidth=1, color=red, arrowhead="vee"]
+P46531->Q99081 [penwidth=1, color=red, arrowhead="vee"]
+P42226->Q9UBK2 [penwidth=1, color=red, arrowhead="vee"]
+P18848->P11021 [penwidth=1, color=red, arrowhead="tee"]
+P27361->P48436 [penwidth=1, color=red, arrowhead="vee"]
+Q12968->P05231 [penwidth=1, color=red, arrowhead="vee"]
+P46531->Q00653 [penwidth=1, color=red, arrowhead="vee"]
+P42226->O15054 [penwidth=1, color=red, arrowhead="vee"]
+Q15672->O43623 [penwidth=1, color=red, arrowhead="vee"]
+O15055->Q15672 [penwidth=1, color=red, arrowhead="tee"]
+O15055->O43623 [penwidth=1, color=red, arrowhead="tee"]
+Q12968 [style=filled, color=red, fillcolor=mistyrose, shape=invhouse];
+P18848 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+P17544 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q9BX63 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P20749 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+P41182 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+Q99626 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q03060 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P49711 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+Q01094 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q14209 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q15329 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P18146 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q9NZC4 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P32519 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+P78545 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P28324 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P11308 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q12809 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P11474 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q01543 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P01100 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P15407 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+P15408 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P55317 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+Q9Y261 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+Q01167 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+Q08050 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+Q12778 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+P98177 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q06546 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P23769 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+P23771 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P10070 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+O60381 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+Q16665 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+P41235 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q00613 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q13422 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P10914 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P14316 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q14653 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q15306 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P05412 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P17275 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P17535 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q9UGL1 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q9Y2Y9 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+O43474 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+Q13887 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q99612 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+Q03164 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+O60675 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P61244 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P56270 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q02078 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q02080 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+Q06413 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+O00470 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+O75030 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P50539 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P10242 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+P01106 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P04198 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P15172 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q15788 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+Q15596 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+Q9Y6Q9 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+O75376 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q16236 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P19838 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+Q00653 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q13133 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P49116 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+P10589 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P10588 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P22736 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q14494 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P32243 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P26367 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P52945 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+P06401 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P14859 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q01860 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+O75626 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+P10276 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q06330 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q04864 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q04206 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+Q01201 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+P48382 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+O14593 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+Q01196 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q15797 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P84022 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q13485 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q8TAQ2 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+O43623 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P56693 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+P48431 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P48436 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q02447 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P17947 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q01892 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q12772 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q08945 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P42224 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P52630 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P40763 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q14765 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P42229 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+P51692 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P42226 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P21675 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P17542 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+P20226 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q99081 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P15884 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+P36402 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+Q9NQB0 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P28347 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q15562 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P05549 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+O15350 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q15672 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+P17480 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+P11473 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+P17861 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+P25490 [style=filled, color=red, fillcolor=mistyrose, shape=doublecircle];
+Q86T24 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+O60315 [style=filled, color=black, fillcolor=lavender, shape=doublecircle];
+O75460 [style=filled, fillcolor=lavender];
+P50750 [style=filled, fillcolor=lavender];
+P36873 [style=filled, fillcolor=lavender];
+P24941 [style=filled, fillcolor=lavender];
+Q9Y4K3 [style=filled, fillcolor=lavender];
+P63165 [style=filled, fillcolor=lavender];
+O15111 [style=filled, fillcolor=mistyrose];
+Q15349 [style=filled, fillcolor=lavender];
+P28482 [style=filled, fillcolor=lavender];
+P27361 [style=filled, fillcolor=mistyrose];
+P35222 [style=filled, fillcolor=lavender];
+P45983 [style=filled, fillcolor=mistyrose];
+P68400 [style=filled, fillcolor=lavender];
+P46531 [style=filled, fillcolor=mistyrose];
+Q13363 [style=filled, fillcolor=lavender];
+Q9NYJ8 [style=filled, fillcolor=lavender];
+Q14164 [style=filled, fillcolor=mistyrose];
+P09874 [style=filled, fillcolor=lavender];
+P11021 [style=filled, fillcolor=mistyrose];
+Q92831 [style=filled, fillcolor=mistyrose];
+P49674 [style=filled, fillcolor=lavender];
+Q92997 [style=filled, fillcolor=lavender];
+Q05655 [style=filled, fillcolor=lavender];
+P67775 [style=filled, fillcolor=mistyrose];
+Q7KZI7 [style=filled, fillcolor=lavender];
+O75925 [style=filled, fillcolor=lavender];
+O75081 [style=filled, fillcolor=mistyrose];
+P49841 [style=filled, fillcolor=lavender];
+Q15759 [style=filled, fillcolor=lavender];
+P23443 [style=filled, fillcolor=mistyrose];
+P06400 [style=filled, fillcolor=lavender];
+Q15303 [style=filled, fillcolor=lavender];
+Q9NSA1 [style=filled, fillcolor=lavender];
+O60716 [style=filled, fillcolor=mistyrose];
+Q96SB3 [style=filled, fillcolor=lavender];
+P33076 [style=filled, fillcolor=lavender];
+P25116 [style=filled, fillcolor=lavender];
+Q9Y6K1 [style=filled, fillcolor=mistyrose];
+Q8NHW3 [style=filled, fillcolor=lavender];
+P46937 [style=filled, fillcolor=mistyrose];
+O15055 [style=filled, fillcolor=lavender];
+P29350 [style=filled, fillcolor=lavender];
+O60674 [style=filled, fillcolor=mistyrose];
+P08887 [style=filled, fillcolor=mistyrose];
+P05231 [style=filled, fillcolor=mistyrose];
+Q13114 [style=filled, fillcolor=mistyrose];
+P05114 [style=filled, fillcolor=mistyrose];
+Q96T58 [style=filled, fillcolor=mistyrose];
+O15379 [style=filled, fillcolor=lavender];
+Q99708 [style=filled, fillcolor=lavender];
+Q13153 [style=filled, fillcolor=mistyrose];
+Q9UBK2 [style=filled, fillcolor=mistyrose];
+P23759 [style=filled, fillcolor=mistyrose];
+P08151 [style=filled, fillcolor=mistyrose];
+O15054 [style=filled, fillcolor=mistyrose];
+
+
+}
