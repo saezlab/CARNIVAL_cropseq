@@ -63,7 +63,9 @@ if ( !exists("settings_run") ) {
   }
   
   if ( dir.exists(source_folder) ) {
+    # After reading yml file, this will do preliminary set ups and checks for folders/files. 
     source( file.path(source_folder, "setting_up_pipeline.R") )
+    source( file.path(source_folder, "utils_cropseq.R") )
   } else {
     stop("run_carnival_cropseq.R: can't continue, please specify correct source folder")
   }
@@ -72,7 +74,6 @@ if ( !exists("settings_run") ) {
 ########################################################################################
 ### ------------ INSTALLING/LOADING NECESSARY PACKAGES ----------------------------- ###
 ########################################################################################
-# TODO this will be removed once there will be a setup of directory for temp files in Bioconductor version of CARNIVAL
 setwd(working_dir)
 print( paste("Current working directory:", getwd()) ) 
 
@@ -84,6 +85,7 @@ if ( dir.exists(source_folder) ) {
 
 cran_list_packages = c("dplyr", "logging", "tidyr", "yaml")
 bioc_list_packages = c("OmnipathR")
+# TODO this will be removed once there will be a setup of directory for temp files in Bioconductor version of CARNIVAL
 github_packages    = c("CARNIVAL" = CARNIVAL_installation_path)
 CheckAndLoadLibraries(  cran_list_packages, bioc_list_packages, github_packages )
 
@@ -96,9 +98,6 @@ loginfo( paste0("Running CARNIVAL script with a setup: source path: ", source_fo
                " Start id: ", start_id, ";",
                " End id: ", end_id), 
          logger = "CARNIVAL_run.module" )
-
-
-source( file.path(source_folder, "utils_cropseq.R") )
 
 ########################################################################################
 ### ------------ READING PREPROCESSED DATA OR RUNNING PREPROCESSING IF NEEDED ------ ###
@@ -151,7 +150,30 @@ RunCarnivalOneTime = function( edited_gene_name, prior_knowledge_network, viper_
   return( res_carnival )
 }
 
-RunCarnivalOnListGenes = function( uniprot_ids, tcr_genes_viper, prior_knowledge_network, threads = 0, 
+CollectPerturbationsData = function(crispr_gene) {
+  perturbations_file = list.files( path = perturbations_folder, pattern = crispr_gene, 
+                                   full.names = T)[1]
+  perturbations_data = read.csv2( perturbations_file )
+  genes = colnames( perturbations_data ) 
+  
+  translated_genes = lapply( genes, function(x) {
+    if ( x %in% uniprot_ids$GENES ) {
+      translated_id = ( uniprot_ids %>% filter(GENES == x) )$UNIPROTKB
+      return( translated_id )
+    } else {
+      return( TranslateIds( x ) ) 
+    }
+  })
+  
+  uniprot_ids %>% bind_rows()
+  
+  colnames( perturbations_data ) = unlist( translated_genes )
+  return( perturbations_data )
+}
+
+RunCarnivalOnListGenes = function( uniprot_ids, perturbations, 
+                                   tcr_genes_viper, prior_knowledge_network, 
+                                   threads = 0, 
                                    naive = FALSE) {
   res_carnivals_genes = list() 
   
@@ -165,10 +187,6 @@ RunCarnivalOnListGenes = function( uniprot_ids, tcr_genes_viper, prior_knowledge
     loginfo( paste("Running CARNIVAL for (TCR) data, gene: ", i), 
              logger = "CARNIVAL_run.module" )
     tryCatch({
-      uniprot_id = uniprot_ids %>% dplyr::filter( GENES == i ) 
-      perturbations = data.frame( "-1" )
-      names(perturbations) = uniprot_id$UNIPROTKB
-    
       viper_scores = tcr_genes_viper %>% as_tibble( rownames = "id" ) %>% 
                                          dplyr::select( id, all_of(i) ) %>% 
                                          drop_na() %>% 
@@ -205,13 +223,13 @@ if ( test_run ) {
   loginfo( "Test run of CARNIVAL is finished", logger = "CARNIVAL_run.module" )
 } else {
   
-  if (run_naive) {
+  if ( run_naive ) {
     RunCarnivalOnListGenes( uniprot_ids[ c(start_id:end_id), ], tcr_genes_viper_naive, 
                             prior_knowledge_network, 
                             carnival_threads, naive = TRUE )  
   }
   
-  if (run_stimulated) { 
+  if ( run_stimulated ) { 
     RunCarnivalOnListGenes( uniprot_ids[ c(start_id:end_id), ], tcr_genes_viper_stimulated, 
                             prior_knowledge_network, 
                             carnival_threads )  

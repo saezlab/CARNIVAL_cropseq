@@ -30,6 +30,7 @@ if ( !exists("working_dir") ) {
 base_path = settings_run$base_path
 input_folder = file.path( base_path, settings_run$input_folder )
 
+perturbations_folder = settings_run$perturbations_folder
 raw_file = file.path( input_folder, settings_run$raw_file )
 annotation_file = file.path( input_folder, settings_run$annotation_file )
 
@@ -76,7 +77,8 @@ if ( end_id == -1) {
   end_id = 30
 }
 
-directories_to_check = c( base_path, input_folder, output_folder, intermediate_results_folder )
+directories_to_check = c( base_path, input_folder, perturbations_folder, 
+                          output_folder, intermediate_results_folder )
 directories_to_check = directories_to_check[ directories_to_check != '']
 
 files_to_check = c()

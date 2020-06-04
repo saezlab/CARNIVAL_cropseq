@@ -97,10 +97,12 @@ LoadPKNForCarnival = function( path_file = "", filter_by_references = 0 ) {
 # Because each request to the database takes a long time, it is better to request all gene_names at the same time
 # TODO for now the only_first param is not working 
 TranslateIds = function( gene_names, only_first = FALSE){
-
-  ensembl = useMart( 'ensembl', dataset = "hsapiens_gene_ensembl" )
-  up = UniProt.ws(taxId = 9606)
-
+  
+  if ( !exists(ensembl) ) {
+    ensembl = useMart( 'ensembl', dataset = "hsapiens_gene_ensembl" )
+    up = UniProt.ws(taxId = 9606)
+  }
+  
   # Returns the uniprot IDs of the corresponding proteins listed in VIPER/DoRothEA results
   # Because BioMart doesn't allow to request more than 3 fields, there are two request
   requested_mart = getBM(attributes = c("uniprot_gn_id",
