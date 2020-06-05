@@ -25,7 +25,7 @@
 cran_mirrors = "https://cran.uni-muenster.de/"
 
 CheckAndLoadLibraries = function(cran_list_packages = "", bioc_list_packages = "", github_packages = "") {
-  all_packages = c( cran_list_packages, bioc_list_packages, github_packages )
+  all_packages = c( cran_list_packages, bioc_list_packages, names(github_packages) )
   all_packages = all_packages[all_packages != ""]
   new_packages = all_packages[!(all_packages %in% installed.packages()[,"Package"])]
   

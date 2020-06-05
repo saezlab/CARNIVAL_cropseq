@@ -117,7 +117,7 @@ if ( file.exists(Rdata_file) ) {
 
 RunCarnivalOneTime = function( edited_gene_name, prior_knowledge_network, viper_scores, 
                                perturbations, output_filename = "out_carnival.csv",
-                               output_dir = "", produce_dot_figure = FALSE, 
+                               output_dir = "", 
                                threads = 0, save_outfile = TRUE,
                                save_image = TRUE) { 
   
@@ -127,7 +127,6 @@ RunCarnivalOneTime = function( edited_gene_name, prior_knowledge_network, viper_
                              inputObj = perturbations,
                              solver = "cplex", 
                              dir_name = output_dir,
-                             DOTfig = produce_dot_figure,
                              timelimit = carnival_timelimit,
                              threads = threads)
   if ( save_outfile ) { 
@@ -144,7 +143,7 @@ RunCarnivalOneTime = function( edited_gene_name, prior_knowledge_network, viper_
   } 
 
   if ( save_image ) {
-    save.image( file = paste0( strsplit(output_filename, "\\.")[[1]][0], ".RData") ) 
+    save( file = paste0( strsplit(output_filename, "\\.")[[1]][0], ".RData"), list = c("results_carnival") ) 
   }
 
   return( res_carnival )
@@ -159,15 +158,15 @@ CollectPerturbationsData = function(crispr_gene) {
   translated_genes = lapply( genes, function(x) {
     if ( x %in% uniprot_ids$GENES ) {
       translated_id = ( uniprot_ids %>% filter(GENES == x) )$UNIPROTKB
-      return( translated_id )
+      return( uniprot_ids %>% filter(GENES == x) )
     } else {
       return( TranslateIds( x ) ) 
     }
   })
   
-  uniprot_ids %>% bind_rows()
+  translated_genes = do.call(rbind.data.frame, translated_genes)
+  colnames( perturbations_data ) = translated_genes$UNIPROTKB
   
-  colnames( perturbations_data ) = unlist( translated_genes )
   return( perturbations_data )
 }
 
@@ -194,12 +193,16 @@ RunCarnivalOnListGenes = function( uniprot_ids, perturbations,
                                          as.data.frame()
     
       tf_names = colnames(viper_scores)
-      colnames(viper_scores) = ReadDorotheaMapping( tf_names, dorothea_mapping_file )$UNIPROT
-  
+      translated_ids = ReadDorotheaMapping( tf_names, dorothea_mapping_file )
+      viper_scores = viper_scores %>% melt() %>% left_join(translated_ids, by=c("variable" = "SYMBOL")) %>%
+                      dplyr::select(UNIPROT, value)
+      viper_scores = viper_scores %>% spread(UNIPROT, value)
+      
+      perturbations = CollectPerturbationsData(i)
+      
       res_carn = RunCarnivalOneTime( i, prior_knowledge_network, viper_scores, perturbations,
                                     output_dir = file.path( output_folder, i ),
                                     output_filename = paste0("out_carnival_", file_prefix, i, ".csv"),
-                                    produce_dot_figure = TRUE,
                                     threads = threads )
         
       res_carnivals_genes[[i]] = res_carn
@@ -219,7 +222,7 @@ loginfo( paste("Prior knowledge network contains", dim(prior_knowledge_network)[
 if ( test_run ) {
   loginfo( "Test run of CARNIVAL is initiated", logger = "CARNIVAL_run.module" )
   # Test CARNIVAL with running on LAT gene (finishes fast)
-  RunCarnivalOnListGenes( uniprot_ids[28, ], tcr_genes_viper_naive, prior_knowledge_network, carnival_threads)
+  RunCarnivalOnListGenes( uniprot_ids[28, ], tcr_genes_viper_naive, prior_knowledge_network, carnival_threads )
   loginfo( "Test run of CARNIVAL is finished", logger = "CARNIVAL_run.module" )
 } else {
   

@@ -98,7 +98,7 @@ LoadPKNForCarnival = function( path_file = "", filter_by_references = 0 ) {
 # TODO for now the only_first param is not working 
 TranslateIds = function( gene_names, only_first = FALSE){
   
-  if ( !exists(ensembl) ) {
+  if ( !exists("ensembl") || !exists("up") ) {
     ensembl = useMart( 'ensembl', dataset = "hsapiens_gene_ensembl" )
     up = UniProt.ws(taxId = 9606)
   }
@@ -132,13 +132,12 @@ TranslateIds = function( gene_names, only_first = FALSE){
 }
 
 # Reads the curated mapping between dorothea regulon and uniprots, 
-# selects only the first value from this list if several mapping are available
-#TODO update: it should accept all values, duplicating the vipers scores for CARNIVAl run then
+# If several mapping are available, returns all.
 ReadDorotheaMapping = function( ids, dorothea_tf_mapping_filename ) {
 
   dorothea_tf_mapping = read.csv( dorothea_tf_mapping_filename )
-  dorothea_unique_mappings = dorothea_tf_mapping[unique(dorothea_tf_mapping$SYMBOL), ]
-  dorothea_unique_mappings = dorothea_unique_mappings %>% filter(SYMBOL %in% ids)
+  #dorothea_unique_mappings = dorothea_tf_mapping[unique(dorothea_tf_mapping$SYMBOL), ]
+  dorothea_unique_mappings = dorothea_tf_mapping %>% filter(SYMBOL %in% ids)
 
   return( dorothea_unique_mappings )
 }
