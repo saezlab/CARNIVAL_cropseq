@@ -3,11 +3,11 @@
 
 
 local:
-  source_folder: "/Users/olgaivanova/GoogleDrive/_PhD_Heidelberg/*CARNIVAL/CARNIVAL_Cropseq_github/"
-  working_dir: "/Users/olgaivanova/GoogleDrive/_PhD_Heidelberg/*CARNIVAL/CARNIVAL_Cropseq_github/"
-  base_path: "/Users/olgaivanova/GoogleDrive/_PhD_Heidelberg/*CARNIVAL/CARNIVAL_Cropseq_github/"
+  source_folder: ""
+  working_dir: ""
+  base_path: ""
   input_folder: "input"
-  perturbations_folder: "/Users/olgaivanova/GoogleDrive/_PhD_Heidelberg/*CARNIVAL/CARNIVAL_Cropseq_github/input/perturbations_data"
+  perturbations_folder: ""
   raw_file: "GSE137554_raw_gene_bc_matrices_h5.h5"
   annotation_file: "GSE137554_CellAnnotation.tsv"
   output_folder: "output"
@@ -30,10 +30,10 @@ local:
 test:
   source_folder: ""
   working_dir: ""
-  base_path: "/Users/olgaivanova/GoogleDrive/_PhD_Heidelberg/*CARNIVAL/CARNIVAL_Cropseq_github/"
+  base_path: ""
   input_folder: "input"
   output_folder: "output"
-  perturbations_folder: "/Users/olgaivanova/GoogleDrive/_PhD_Heidelberg/*CARNIVAL/CARNIVAL_Cropseq_github/input/perturbations_data"
+  perturbations_folder: ""
   preprocessing: FALSE
   test_run: TRUE
   carnival_run: FALSE
@@ -51,12 +51,12 @@ test:
   run_naive: TRUE
   run_stimulated: TRUE
 server:
-  source_folder: "/net/data.isilon/ag-saez/bq_oivanova/carnival_cropseq_runs/code"
+  source_folder: ""
   working_dir: ""
   base_path: ""
-  input_folder: "/home/bq_oivanova/carnival_cropseq_runs/input"
-  output_folder: "/home/bq_oivanova/carnival_cropseq_runs/output"
-  perturbation_folder: "/home/bq_oivanova/carnival_cropseq_runs/input/perturbations_data"
+  input_folder: ""
+  output_folder: ""
+  perturbation_folder: ""
   raw_file: ""
   annotation_file: ""
   preprocessing: FALSE
@@ -64,7 +64,7 @@ server:
   carnival_run: TRUE
   carnival_threads: 20
   carnival_timelimit: 3600
-  solver_path: "/net/data.isilon/ag-saez/bq_oivanova/carnival_cropseq_runs/cplex_installation/cplex/bin/x86-64_linux/cplex"
+  solver_path: ""
   dorothea_mapping_file: "dorothea_TF_mapping.csv"
   dorothea_path: ""
   PKN_file: "PKNs/omnipath_10_02_2020_13_46.txt"
